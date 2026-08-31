@@ -1,0 +1,27 @@
+{
+  "name": "comfyui-fans",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "docusaurus start --no-open --host 127.0.0.1 --port 3000",
+    "build": "docusaurus build",
+    "serve": "docusaurus serve"
+  },
+  "dependencies": {
+    "@docusaurus/core": "^3.7.0",
+    "@docusaurus/preset-classic": "^3.7.0",
+    "@docusaurus/theme-mermaid": "^3.7.0",
+    "@mdx-js/react": "^3.0.1",
+    "clsx": "^2.1.1",
+    "prism-react-renderer": "^2.4.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "browserslist": {
+    "production": [">0.5%", "not dead", "not op_mini all"],
+    "development": ["last 3 chrome version", "last 5 firefox version", "safari >= 14"]
+  },
+  "engines": {
+    "node": ">=18.0"
+  }
+}

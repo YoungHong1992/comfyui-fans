@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="none">
+  <!-- 原创节点图风格 Logo：三个节点两条连线，致敬节点式工作流 -->
+  <g stroke="#49378b" stroke-width="2.4" stroke-linecap="round">
+    <path d="M11 20 L25 11" data-theme-fill="0"/>
+    <path d="M11 20 L25 29"/>
+  </g>
+  <circle cx="7" cy="20" r="4.6" fill="#49378b"/>
+  <circle cx="29" cy="10" r="4.6" fill="#F2FF59" stroke="#49378b" stroke-width="2.2"/>
+  <circle cx="29" cy="30" r="4.6" fill="#49378b"/>
+  <text x="44" y="26.5" font-family="Inter, Segoe UI, sans-serif" font-size="19" font-weight="800" fill="#49378b" letter-spacing="-0.5">ComfyUI</text>
+  <text x="44" y="37" font-family="Inter, Segoe UI, sans-serif" font-size="8.5" font-weight="600" fill="#8b7fae" letter-spacing="1.2">FANS · 总分总教程拆解</text>
+</svg>
