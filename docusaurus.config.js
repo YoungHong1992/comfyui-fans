@@ -10,7 +10,7 @@ const darkCodeTheme = require('prism-react-renderer').themes.dracula;
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'ComfyUI Fans',
-  tagline: '以「总—分—总」方式逐节点拆解官方工作流，让每位爱好者都能学会 ComfyUI',
+  tagline: '对齐官方文档的 ComfyUI 中文教程站，让每位爱好者都能学会 ComfyUI',
   favicon: 'img/favicon.svg',
   url: 'https://comfyui.fans',
   baseUrl: '/',
@@ -52,19 +52,19 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
-          { to: '/docs/intro', label: '开始使用', position: 'left' },
+          { to: '/docs/get-started/intro', label: '开始使用', position: 'left' },
           {
             type: 'dropdown',
-            label: '官方工作流拆解',
+            label: '官方教程',
             position: 'left',
             items: [
-              { to: '/docs/tutorials/t2i', label: '文生图：基础示例（总-分-总）' },
-              { to: '/docs/tutorials/i2i', label: '图生图' },
-              { to: '/docs/tutorials/inpaint', label: '局部重绘' },
-              { to: '/docs/tutorials/upscale', label: '高清放大' },
-              { to: '/docs/tutorials/lora', label: 'LoRA 模型微调' },
-              { to: '/docs/tutorials/controlnet', label: 'ControlNet 控制' },
-              { to: '/docs/tutorials/video', label: '视频生成工作流' },
+              { to: '/docs/tutorials/basic/text-to-image', label: '文生图：基础示例' },
+              { to: '/docs/tutorials/basic/image-to-image', label: '图生图' },
+              { to: '/docs/tutorials/basic/inpaint', label: '局部重绘' },
+              { to: '/docs/tutorials/basic/upscale', label: '图像放大' },
+              { to: '/docs/tutorials/basic/lora', label: 'LoRA' },
+              { to: '/docs/tutorials/controlnet/overview', label: 'ControlNet' },
+              { to: '/docs/tutorials/video/wan2_2', label: 'Wan2.2 视频生成' },
             ],
           },
           {
@@ -74,7 +74,7 @@ const config = {
             items: [
               { to: '/docs/concepts/workflow', label: '工作流：节点式可视化编程' },
               { to: '/docs/concepts/nodes', label: '节点' },
-              { to: '/docs/concepts/connections', label: '连线' },
+              { to: '/docs/concepts/links', label: '连线' },
               { to: '/docs/concepts/models', label: '模型' },
             ],
           },
@@ -98,19 +98,19 @@ const config = {
           {
             title: '文档',
             items: [
-              { label: '介绍', to: '/docs/intro' },
-              { label: '安装 ComfyUI', to: '/docs/install' },
-              { label: '首次生成图像', to: '/docs/first-generation' },
+              { label: '介绍', to: '/docs/get-started/intro' },
+              { label: '安装 ComfyUI', to: '/docs/get-started/install/overview' },
+              { label: '首次生成图像', to: '/docs/get-started/first-generation' },
               { label: '学习总结', to: '/docs/summary' },
             ],
           },
           {
-            title: '官方工作流拆解',
+            title: '官方教程',
             items: [
-              { label: '文生图（必读）', to: '/docs/tutorials/t2i' },
-              { label: '图生图', to: '/docs/tutorials/i2i' },
-              { label: '局部重绘', to: '/docs/tutorials/inpaint' },
-              { label: 'ControlNet', to: '/docs/tutorials/controlnet' },
+              { label: '文生图（必读）', to: '/docs/tutorials/basic/text-to-image' },
+              { label: '图生图', to: '/docs/tutorials/basic/image-to-image' },
+              { label: '局部重绘', to: '/docs/tutorials/basic/inpaint' },
+              { label: 'ControlNet', to: '/docs/tutorials/controlnet/overview' },
             ],
           },
           {

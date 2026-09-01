@@ -1,0 +1,80 @@
+
+# ComfyUI 图像放大工作流
+
+> 在 ComfyUI 中放大图像：加载放大模型、构建工作流，并将其接在文生图之后以获得更高分辨率的输出。
+
+## 图像放大工作流
+
+### 模型安装
+
+需要下载的 ESRGAN 模型：
+
+<Steps>
+  <Step title="访问 OpenModelDB">
+    访问 [OpenModelDB](https://openmodeldb.info/) 搜索并下载图像放大模型（例如 RealESRGAN）
+
+    <img src="/img/tutorial/basic/upscale/upscale_OpenModelDB.jpg" alt="openmodeldb" width="1200" height="1209" data-path="images/tutorial/basic/upscale/upscale_OpenModelDB.jpg" />
+
+    如图所示：
+
+    1. 使用类别选择器按图像类型过滤模型
+    2. 模型的放大倍数显示在右上角（例如截图中的 2x）
+
+    本教程将使用 [4x-ESRGAN](https://openmodeldb.info/models/4x-ESRGAN) 模型。点击模型详情页上的 `下载` 按钮。
+
+    <img src="/img/tutorial/basic/upscale/upscale_OpenModelDB_download.jpg" alt="OpenModelDB_download" width="1200" height="848" data-path="images/tutorial/basic/upscale/upscale_OpenModelDB_download.jpg" />
+  </Step>
+
+  <Step title="将模型文件保存到目录">
+    将模型文件（.pth）保存到 `ComfyUI/models/upscale_models` 目录
+  </Step>
+</Steps>
+
+### 工作流与资产
+
+下载以下图像并将其拖入 ComfyUI，以加载基本的图像放大工作流：
+![图像放大工作流](/img/external/raw-githubusercontent-com/basic/upscale_workflow.png)
+
+<Tip>
+  包含工作流 JSON 元数据的图像可以直接拖入 ComfyUI，或通过菜单 `工作流` -> `打开（ctrl+o）` 加载。
+</Tip>
+
+使用这张尺寸较小的图像作为输入：
+
+<img src="/img/tutorial/basic/upscale/upscale-input.jpg" alt="Upscale-input" width="512" height="512" data-path="images/tutorial/basic/upscale/upscale-input.jpg" />
+
+### 逐步完成工作流
+
+按下图所示步骤操作，确保工作流能够正确运行。
+
+<img src="/img/tutorial/basic/upscale/upscale_simple_workflow.jpg" alt="图像放大工作流" width="2136" height="1192" data-path="images/tutorial/basic/upscale/upscale_simple_workflow.jpg" />
+
+1. 确保 `加载放大模型` 加载的是 `4x-ESRGAN.pth`
+2. 将输入图像上传到 `加载图像` 节点
+3. 点击 `队列` 按钮，或使用快捷键 `Ctrl(cmd) + Enter` 生成图像
+
+核心组件是 `加载放大模型` 和 `缩放图像（使用模型）` 节点，它们接收图像输入，并使用已选择的模型对其进行放大。
+
+## 文生图组合工作流
+
+在掌握基础的图像放大之后，我们可以将其与[文生图](https://docs.comfy.org/zh/tutorials/basic/text-to-image)工作流进行组合。关于文生图的基础知识，请参阅[文生图教程](https://docs.comfy.org/zh/tutorials/basic/text-to-image)。
+
+下载并将此图像拖入 ComfyUI，即可加载组合工作流：
+
+<img src="/img/tutorial/basic/upscale/esrgan_example.png" alt="文生图放大工作流" width="2533" height="941" data-path="images/tutorial/basic/upscale/esrgan_example.png" />
+
+该工作流将文生图的输出图像直接连接到放大节点，以进行最终处理。
+
+## 其他提示
+
+<Tip>
+  模型特性：
+
+  * **RealESRGAN**：常规图像放大
+  * **BSRGAN**：擅长处理文字和锐利边缘
+  * **SwinIR**：保留自然纹理，非常适合风景图像
+</Tip>
+
+1. **链式放大**：组合多个放大节点（例如 2x → 4x）以实现超高倍率放大
+2. **混合工作流**：在生成之后连接放大节点，构建“生成+增强”流水线
+3. **对比测试**：不同模型在特定图像类型上表现更好，建议测试多种选项

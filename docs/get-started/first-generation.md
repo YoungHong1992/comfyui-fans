@@ -1,0 +1,183 @@
+
+# 开始 ComfyUI 的 AI 绘图之旅
+
+> 使用 ComfyUI 生成你的第一张 AI 图片。学习加载示例工作流、安装模型，并完成你的首次文生图生成。
+
+<Note>
+  本部分文档仅针对**本地用户**，即在自己设备上安装并运行 ComfyUI 的用户。如果你不想进行本地安装，可以直接使用我们的官方云服务。
+</Note>
+
+<Card title="试用 Comfy Cloud" icon="cloud" href="http://cloud.comfy.org/?template=image_z_image_turbo&utm_source=docs">
+  无需安装，直接在云端运行 ComfyUI。使用 Google 账号登录，每位用户**每月可获得 400 积分**。
+</Card>
+
+本篇的主要目的是带你初步了解 ComfyUI 熟悉 ComfyUI 的一些基础操作，并引导你首次的图片生成
+
+1. 加载示例工作流
+   * 从 ComfyUI 加载`Workflows template`中的`Text to Image`工作流
+   * 使用带有`metadata` 的图片中加载工作流
+2. 指导你完成模型
+   * 自动安装模型
+   * 手动安装模型
+3. 进行一次文本到图片的生成
+
+## 关于文生图的说明
+
+**文生图（Text to Image）**，是 AI 绘图的基础，通过输入文本描述来生成对应的图片，是 AI 绘图最常用的功能之一，你可以理解成你把你的**绘图要求(正向提示词、负向提示词)**告诉一个**画家(绘图模型)**，画家会根据你的要求，画出你想要的内容，由于本篇教程主要是为了引导你开始 ComfyUI 的使用，对于文生图的详细说明，我们将在[文生图](https://docs.comfy.org/zh/tutorials/basic/image-to-image)章节进行详细讲解
+
+## ComfyUI 文生图工作流教程讲解
+
+### 1. 启动 ComfyUI
+
+请确定你已经按照[安装指南](/docs/get-started/install/overview)完成了 ComfyUI 的启动，并可以成功打开 ComfyUI 的页面。或者，你也可以使用 [Comfy Cloud](https://docs.comfy.org/zh/get_started/cloud) 在云端使用 ComfyUI，无需安装。
+
+<img src="/img/desktop/comfyui-interface.jpg" alt="ComfyUI界面" width="2000" height="1414" data-path="images/desktop/comfyui-interface.jpg" />
+
+如果你还未安装 ComfyUI，请前往[安装方式怎么选](/docs/get-started/install/overview)，根据你的设备情况选择一个合适的版本进行安装，装好后回到本篇继续。
+
+### 2. 加载默认文生图工作流
+
+正常情况下，打开 ComfyUI 后是会自动加载默认的文生图工作流的, 不过你仍旧可以尝试以下不同方式加载工作流来熟悉 ComfyUI 的一些基础操作
+
+<Tabs>
+  <TabItem value="从带有 metadata 的图片中加载">
+    所有用 ComfyUI 生成的图片，都会带有 metadata 信息，这些信息会包含图片的 workflow 信息，你可以通过这些信息来加载对应的 workflow。
+
+    现在，让我们尝试一下，请保存下面的工作流图片，然后直接拖入 ComfyUI 的界面中，或者使用菜单 **工作流（Workflows）** -> **打开（Open）** 打开这个图片以加载对应的 workflow
+
+    ![ComfyUI-文生图工作流](/img/external/raw-githubusercontent-com/main/text-to-image-workflow.png)
+  </TabItem>
+
+  <TabItem value="从 workflow.json 文件中加载">
+    ComfyUI 工作流还可以 json 格式存储，当我们完成一个工作流后，可以使用菜单 **工作流（Workflows）** -> **导出（Export）** 导出，这样对应的工作流就可以被保存为 json 文件中加载
+
+    现在，让我们尝试一下，点击下面的按钮，前往 Github 下载对应的 text-to-image.json 文件
+
+    <a className="prose" href="https://github.com/Comfy-Org/docs/blob/main/public/text-to-image.json" download style={{ display: 'inline-block', backgroundColor: '#0078D6', color: '#ffffff', padding: '10px 20px', borderRadius: '8px', borderColor: "transparent", textDecoration: 'none', fontWeight: 'bold'}}>
+      <p className="prose" style={{ margin: 0, fontSize: "0.8rem" }}>前往下载 text-to-image.json 文件</p>
+    </a>
+
+    下载完成后，请使用菜单 **工作流（Workflows）** -> **打开（Open）** 打开这个 json 文件以加载对应的 workflow
+  </TabItem>
+</Tabs>
+
+### 3. 安装绘图模型
+
+通常在 ComfyUI 的初始安装中，并不会包含任何的绘图模型，但是模型是我们运行图片生成必不可少的部分。
+
+在你完成第二步，工作流的加载后，如果你的电脑上没有安装[v1-5-pruned-emaonly-fp16.safetensors](https://huggingface.co/Comfy-Org/stable-diffusion-v1-5-archive/blob/main/v1-5-pruned-emaonly-fp16.safetensors) 这个模型文件时，一般会出现下图的提示
+
+首先，ComfyUI 会提示有模型缺失：
+
+<img src="/img/tutorial/gettingstarted/missing_model_warning_1.png" alt="模型缺失提示" width="1200" height="814" data-path="images/tutorial/gettingstarted/missing_model_warning_1.png" />
+
+点击这个提示后，你可以看到具体缺失的模型以及对应的下载链接：
+
+<img src="/img/tutorial/gettingstarted/missing_model_warning_2.png" alt="缺失模型详情" width="1200" height="812" data-path="images/tutorial/gettingstarted/missing_model_warning_2.png" />
+
+你可以直接选择点击 `Download` 按钮，让 ComfyUI 自动完成对应的模型的下载，但由于在有些地区不能够顺利访问对应模型的下载源，所以在这个步骤中，我将说明几种不同的模型安装方法。
+
+无论使用哪种方法，模型都会被保存到 `<你的 ComfyUI 安装位置>/ComfyUI/models/` 文件夹下。你可以在电脑上找到这个文件夹位置，并留意以下几点：
+
+* 你会看到很多子文件夹（按用途分类），例如：`checkpoints`、`embeddings`、`vae`、`lora`、`upscale_model` 等
+* ComfyUI 会在启动时检测这些文件夹下的模型文件
+* 如果你在 `extra_model_paths.yaml` 里配置了额外的模型路径，ComfyUI 也会在启动时一并检测
+
+<Tabs>
+  <TabItem value="Comfy 桌面版（如何找到模型文件夹）">
+    <img src="/img/tutorial/gettingstarted/desktop_model_folder_path.png" alt="桌面版模型文件夹位置" width="2004" height="1442" data-path="images/tutorial/gettingstarted/desktop_model_folder_path.png" />
+
+    **Comfy 桌面版**的模型安装位置可能与其它版本不同。按下面步骤打开模型文件夹：
+
+    1. 点击左上角 **应用图标（Logo）**
+    2. 打开 **帮助** → **打开文件夹**
+    3. 选择 **打开模型文件夹**
+
+    下面截图可能显示为英文菜单；如果你使用的是中文界面，请按上面的 **帮助** → **打开文件夹** → **打开模型文件夹** 操作即可。
+  </TabItem>
+
+  <TabItem value="ComfyUI 便携版（如何找到模型文件夹）">
+    便携版的模型文件夹一般在：
+
+    `ComfyUI_windows_portable/ComfyUI/models/`
+  </TabItem>
+</Tabs>
+
+被检测到的不同的文件夹里的模型将可以在 ComfyUI 的不同 **模型加载节点** 里使用，下面让我们开始了解不同模型的安装方式：
+
+<Tabs>
+  <TabItem value="自动下载模型">
+    在你点击 **Download** 按钮后，ComfyUI 将会执行下载,根据你使用的版本不同，将会执行不同的行为
+
+    <Tabs>
+      <TabItem value="Comfy 桌面版">
+        桌面版将自动完成模型的下载并保存到 `<你的 ComfyUI 安装位置>/ComfyUI/models/checkpoints` 目录下
+        你可以等待安装完成或者在侧边栏的模型面板里查看安装进度
+
+        <img src="/img/tutorial/gettingstarted/desktop_download_status.png" alt="模型下载进度" width="1200" height="821" data-path="images/tutorial/gettingstarted/desktop_download_status.png" />
+
+        <Warning>
+          自动下载通常会从 **Hugging Face** 拉取模型，请确保你的网络可以正常访问 Hugging Face。
+
+          如果出现**长时间没有开始下载**或**进度一直不动**的情况，请从缺失模型的详情里**复制下载链接**，或直接使用本文下方的 **手动安装模型** 流程完成安装。
+        </Warning>
+      </TabItem>
+
+      <TabItem value="ComfyUI 便携版">
+        浏览器将会执行文件下载，请在下载完成后，将文件保存到的 `<你的 ComfyUI 安装位置>/ComfyUI_windows_portable/ComfyUI/models/checkpoints` 目录下
+      </TabItem>
+    </Tabs>
+  </TabItem>
+
+  <TabItem value="手动完成模型的安装">
+    请访问模型地址：[前往下载 v1-5-pruned-emaonly-fp16.safetensors](https://huggingface.co/Comfy-Org/stable-diffusion-v1-5-archive/blob/main/v1-5-pruned-emaonly-fp16.safetensors)
+    参考下面图片完成对应模型的下载
+
+    <img src="/img/tutorial/gettingstarted/first-image-generation-5-hugging-face.jpg" alt="Hugging Face 模型下载" width="769" height="727" data-path="images/tutorial/gettingstarted/first-image-generation-5-hugging-face.jpg" />
+
+    下载完成后，请将对应的**v1-5-pruned-emaonly-fp16.safetensors** 文件保存到以下位置
+
+    <Tabs>
+      <TabItem value="Comfy 桌面版">
+        请找到你在安装过程中设置的 ComfyUI 安装位置，将对应模型文件保存到以下文件夹位置 `<你的 ComfyUI 安装位置>/ComfyUI/models/checkpoints`
+
+        <img src="/img/tutorial/gettingstarted/first-image-generation-6-2-desktop.jpg" alt="Comfy 桌面版模型保存位置" width="911" height="710" data-path="images/tutorial/gettingstarted/first-image-generation-6-2-desktop.jpg" />
+      </TabItem>
+
+      <TabItem value="ComfyUI便携版本">
+        找到你解压后的便携版的文件夹，在**ComfyUI\_windows\_portable/ComfyUI/models/checkpoints** 文件夹下完成模型的保存
+
+        <img src="/img/tutorial/gettingstarted/first-image-generation-6-1-portable.jpg" alt="ComfyUI 便携版模型保存位置" width="1081" height="709" data-path="images/tutorial/gettingstarted/first-image-generation-6-1-portable.jpg" />
+      </TabItem>
+    </Tabs>
+
+    完成对应保存操作后，请刷新或者重启 ComfyUI 保证对应模型可以被 ComfyUI 检测
+  </TabItem>
+</Tabs>
+
+### 4. 加载模型，并进行第一次图片生成
+
+在你完成模型的安装或更新后，可以按键盘上的 **`R`** 键刷新对象定义，从而更新节点里的模型列表（例如 **Load Checkpoint** 下拉框中的可选模型）。然后请对照下图完成加载模型并进行第一次生成：
+
+<img src="/img/tutorial/gettingstarted/run_workflow.png" alt="运行工作流" width="1200" height="881" data-path="images/tutorial/gettingstarted/run_workflow.png" />
+
+请对应图片序号，完成下面操作
+
+1. 请在 **Load Checkpoint** 节点使用箭头或者点击文本区域确保 **v1-5-pruned-emaonly-fp16.safetensors** 被选中，且左右切换箭头不会出现 **null** 的文本
+2. 点击 `Run` 按钮，或者使用快捷键 `Ctrl + enter(回车)` 来执行图片生成
+
+等待对应流程执行完成后，你应该可以在界面的 **保存图像(Save Image)** 节点中看到对应的图片结果，可以在上面右键保存到本地
+
+<img src="/img/tutorial/gettingstarted/result.png" alt="ComfyUI 首次图片生成结果" width="1200" height="952" data-path="images/tutorial/gettingstarted/result.png" />
+
+对于文生图的详细说明，下面的指南中会有详细的说明和指导
+
+<Card title="ComfyUI 文生图工作流示例说明" icon="link" href="https://docs.comfy.org/zh/tutorials/basic/text-to-image">
+  点击这里查看文生图工作流的详细说明
+</Card>
+
+## 故障排除
+
+### 模型加载问题
+
+如果 `Load Checkpoint` 节点没有任何模型可以选择，或者显示为 **null**，请先确认你的模型安装位置正确，或者尝试 **刷新** 或者 **重启 ComfyUI** 使得对应文件夹下的模型可以被检测到

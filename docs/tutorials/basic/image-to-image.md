@@ -1,0 +1,73 @@
+
+# ComfyUI 图生图工作流
+
+> 本篇将引导了解并完成图生图工作流
+
+<h2 id="what-is-image-to-image">
+  什么是 ComfyUI 中的图生图？
+</h2>
+
+图生图（Image to Image）是 ComfyUI 中的一种工作流，允许用户输入一张图像，并基于该图像生成一张新图像。
+
+图生图可用于以下场景：
+
+* 转换原始图像风格，例如将写实照片转换为艺术风格
+* 将线稿转换为写实图像
+* 图像修复
+* 为老照片上色
+* ……以及其他场景
+
+打个比方来解释：
+这就像请一位艺术家根据你的参考图像来创作一件特定作品。
+
+如果你仔细将这个教程与[文生图](https://docs.comfy.org/zh/tutorials/basic/text-to-image)教程进行比较，
+你就会发现图生图的流程与文生图非常相似，
+只是多了一个输入参考图像作为条件。在文生图中，我们让艺术家（图像模型）根据提示词自由创作；
+而在图生图中，我们让艺术家同时根据参考图像和提示词进行创作。
+
+## ComfyUI 图生图工作流示例指南
+
+### 模型安装
+
+下载 [v1-5-pruned-emaonly-fp16.safetensors](https://huggingface.co/Comfy-Org/stable-diffusion-v1-5-archive/blob/main/v1-5-pruned-emaonly-fp16.safetensors) 文件并将其放入你的 `ComfyUI/models/checkpoints` 文件夹。
+
+### 图生图工作流与输入图像
+
+下载下面的图像并**将其拖入 ComfyUI** 以加载工作流：
+![图生图工作流](/img/external/raw-githubusercontent-com/image_to_image/workflow.png)
+
+<Tip>
+  包含工作流 JSON 元数据的图像可以直接拖入 ComfyUI，或通过菜单 `Workflows` -> `Open (ctrl+o)` 加载。
+</Tip>
+
+下载下面的图像，我们将把它用作输入图像：
+
+<img src="/img/tutorial/basic/img2img/input.jpeg" alt="示例图像" width="1024" height="1024" data-path="images/tutorial/basic/img2img/input.jpeg" />
+
+### 分步完成工作流
+
+请按照下图中的步骤操作，以确保工作流正确运行。
+
+<img src="/img/tutorial/basic/img2img/image-to-image-02-guide.jpg" alt="ComfyUI 图生图工作流 - 步骤" width="1197" height="779" data-path="images/tutorial/basic/img2img/image-to-image-02-guide.jpg" />
+
+1. 确保 `Checkpoint加载器（简易）` 加载 **v1-5-pruned-emaonly-fp16.safetensors**
+2. 将输入图像上传到 `加载图像` 节点
+3. 点击 `队列` 或按 `Ctrl/Cmd + Enter` 生成
+
+## 图生图工作流的关键要点
+
+图生图工作流的关键在于 `KSampler` 节点中的 `denoise` 参数，该参数应 **小于 1**
+
+如果你调整过 `denoise` 参数并生成了图像，你会注意到：
+
+* `denoise` 值越小，已生成图像与参考图像之间的差异越小
+* `denoise` 值越大，已生成图像与参考图像之间的差异越大
+
+这是因为 `denoise` 决定了在将参考图像转换之后，添加到 Latent空间图像中的噪波强度。如果 `denoise` 为 1，Latent空间图像将变为完全随机的噪波，使其与 `空Latent图像` 节点生成的Latent空间相同，从而丢失参考图像的所有特征。
+
+相关原理请参阅[文生图](https://docs.comfy.org/zh/tutorials/basic/text-to-image)教程中的原理说明。
+
+## 开始你自己的尝试
+
+1. 尝试修改 **KSampler** 节点中的 `denoise` 参数，逐渐从 1 调整到 0，观察已生成图像的变化
+2. 换成你自己的提示词和参考图像，生成属于你自己的图像效果

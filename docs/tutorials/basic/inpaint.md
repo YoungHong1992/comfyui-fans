@@ -1,0 +1,121 @@
+
+# ComfyUI 局部重绘工作流
+
+> ComfyUI 局部重绘教程：编辑图像的部分区域、用遮罩编辑器绘制蒙版，并在工作流中连接 VAE Encode (for Inpainting) 节点。
+
+本篇将引导了解 AI 绘图中，局部重绘的概念，并在 ComfyUI 中完成局部重绘工作流生成，我们将接触以下内容：
+
+* 使用局部重绘工作流完成画面的修改
+* 了解并使用 ComfyUI 中遮罩编辑器
+* 了解相关节点 VAE Encoder (for Inpainting)
+
+## 关于局部重绘
+
+在 AI 图像生成过程中，我们常会遇到生成的画面整体较为满意，但是画面中存在一些不希望出现或者错误的元素，但是重新生成可能会生成另外一张完全不同的图片，所以这时候利用局部重绘来修复这部分的元素就非常有必要了。
+
+这就像让 **画家(AI 绘图模型)** 画了一幅画，但是总是会有稍微有 **局部区域需要调整**，我们需要向画家说明**需要调整的区域(遮罩)**，然后让画家会根据我们的要求进行 **重新绘制(重绘)**。
+
+局部重绘的场景包括：
+
+* **瑕疵修复：** 消除照片中多余物体、错误的AI生成的画面的肢体等
+* **细节优化：** 精准调整局部元素（如修改服装纹理、调整面部表情）
+* 等其它场景
+
+## ComfyUI Inpainting 工作流示例
+
+### 模型与资源准备
+
+#### 1. 模型安装
+
+下载 [512-inpainting-ema.safetensors](https://huggingface.co/Comfy-Org/stable_diffusion_2.1_repackaged/blob/main/512-inpainting-ema.safetensors) 文件，并将其放入你的 `ComfyUI/models/checkpoints` 文件夹：
+
+#### 2. Inpainting 素材
+
+请下载下面的图像，我们将其用作输入：
+
+<img src="/img/tutorial/basic/inpaint/input.png" alt="ComfyUI Inpainting 输入图像" width="1024" height="1024" data-path="images/tutorial/basic/inpaint/input.png" />
+
+<Note>这张图像已经包含了 `alpha` 透明度通道（透明遮罩），因此你不需要手动绘制遮罩。本教程也会介绍如何使用遮罩编辑器来绘制遮罩。</Note>
+
+#### 3. Inpainting 工作流
+
+下载下面的图像并将其**拖入 ComfyUI** 以加载工作流：
+
+![ComfyUI Inpainting 工作流](/img/external/raw-githubusercontent-com/basic/sd1.5_inpaint.png)
+
+<Tip>
+  元数据中包含工作流 JSON 的图像可以直接拖入 ComfyUI，或使用菜单 `工作流` -> `打开（Ctrl+O）` 来加载。
+</Tip>
+
+### ComfyUI Inpainting 工作流示例讲解
+
+请按照下图中的步骤操作，以确保工作流正确运行。
+
+<img src="/img/tutorial/basic/inpaint/inpaint_workflow.png" alt="ComfyUI Inpainting 工作流" width="2000" height="1108" data-path="images/tutorial/basic/inpaint/inpaint_workflow.png" />
+
+1. 确保 `Load Checkpoint` 加载的是 `512-inpainting-ema.safetensors`
+2. 将输入图像上传到 `Load Image` 节点
+3. 点击 `Queue` 或使用 `Ctrl + Enter` 来生成
+
+作为对比，以下是使用 [v1-5-pruned-emaonly-fp16.safetensors](https://huggingface.co/Comfy-Org/stable-diffusion-v1-5-archive/blob/main/v1-5-pruned-emaonly-fp16.safetensors) 模型得到的结果：
+
+<img src="/img/tutorial/basic/inpaint/inpaint_sd1.5_pruned_emaonly.png" alt="SD1.5 Inpainting 结果" width="1024" height="1024" data-path="images/tutorial/basic/inpaint/inpaint_sd1.5_pruned_emaonly.png" />
+
+你会发现，[512-inpainting-ema.safetensors](https://huggingface.co/Comfy-Org/stable_diffusion_2.1_repackaged/blob/main/512-inpainting-ema.safetensors) 模型生成的结果具有更好的 inpainting 效果和更自然的过渡。
+这是因为该模型是专门为 inpainting 设计的，它帮助我们更好地控制生成区域，从而改善 inpainting 效果。
+
+还记得我们一直使用的比喻吗？不同的模型就像能力各异的画家，但每位画家都有自己的上限。选择合适的模型可以帮助你获得更好的生成结果。
+
+你可以尝试以下方法以获得更好的结果：
+
+1. 修改正向和负向提示词，使用更具体的描述
+2. 在 `KSampler` 中使用不同的种子多次运行，以获得不同的生成结果
+3. 在了解本教程中关于遮罩编辑器的内容后，你可以对已生成的结果重新进行 inpainting，直到获得满意的效果。
+
+接下来，我们将学习如何使用**遮罩编辑器（Mask Editor）**。尽管我们的输入图像已经包含了 `alpha` 透明度通道（即我们想要编辑的区域），不需要手动绘制遮罩，但在实际应用中，你通常会使用遮罩编辑器来创建遮罩。
+
+### 使用遮罩编辑器
+
+首先右键点击 `Save Image` 节点，然后选择 `Copy(Clipspace)`：
+
+<img src="/img/tutorial/basic/inpaint/inpaint_copy_clipspace.png" alt="复制图像到剪贴板" width="751" height="1112" data-path="images/tutorial/basic/inpaint/inpaint_copy_clipspace.png" />
+
+然后右键点击 **Load Image** 节点，并选择 `Paste(Clipspace)`：
+
+<img src="/img/tutorial/basic/inpaint/inpaint_paste_clipspace.png" alt="粘贴图像" width="750" height="947" data-path="images/tutorial/basic/inpaint/inpaint_paste_clipspace.png" />
+
+再次右键点击 **Load Image** 节点，并选择 `Open in MaskEditor`：
+
+<img src="/img/tutorial/basic/inpaint/inpaint_open_in_maskeditor.jpg" alt="打开遮罩编辑器" width="894" height="1000" data-path="images/tutorial/basic/inpaint/inpaint_open_in_maskeditor.jpg" />
+
+<img src="/img/tutorial/basic/inpaint/inpaint-maskeditor.gif" alt="遮罩编辑器演示" width="960" height="720" data-path="images/tutorial/basic/inpaint/inpaint-maskeditor.gif" />
+
+1. 在右侧面板调整画笔参数
+2. 使用橡皮擦修正错误
+3. 完成后点击 `Save`
+
+绘制的内容将作为遮罩输入到 VAE Encoder（用于 Inpainting）节点中进行编码
+
+然后尝试调整提示词并再次生成，直到获得满意的结果。
+
+## 局部重绘制相关节点
+
+通过[文生图](https://docs.comfy.org/zh/tutorials/basic/text-to-image)、[图生图](https://docs.comfy.org/zh/tutorials/basic/image-to-image) 和本篇的工作流对比，我想你应该可以看到这几个工作流主要的差异都在于 VAE 部分这部分的条件输入,
+在这个工作流中我们使用到的是 **VAE 内部编码器** 节点，这个节点是专门用于局部重绘的节点，它可以帮助我们更好地控制生成区域，从而获得更好的生成效果。
+
+<img src="/img/comfy_core/latent/inpaint/vae_encode_for_inpainting.jpg" alt="VAE Encoder (for Inpainting) 节点" width="854" height="440" data-path="images/comfy_core/latent/inpaint/vae_encode_for_inpainting.jpg" />
+
+**输入类型**
+
+| 参数名称           | 作用                                                     |
+| -------------- | ------------------------------------------------------ |
+| `pixels`       | 需要编码到潜空间的输入图像。                                         |
+| `vae`          | 用于将图片从像素空间编码到潜在空间的 VAE 模型。                             |
+| `mask`         | 图片遮罩，用来具体指明哪个区域需要进行修改。                                 |
+| `grow_mask_by` | 在原有的遮罩基础上，向外扩展的像素值，保证在遮罩区域外围有一定的过度区域，避免重绘区域与原图存在生硬的过渡。 |
+
+**输出类型**
+
+| 参数名称     | 作用                |
+| -------- | ----------------- |
+| `latent` | 经过 VAE 编码后的潜空间图像。 |

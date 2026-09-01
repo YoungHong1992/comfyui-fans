@@ -1,0 +1,238 @@
+
+# ComfyUI Flux 文生图工作示例
+
+> 在 ComfyUI 中使用开源的 Flux.1 模型进行文生图，支持完整版和 FP8 Checkpoint 版本，并附逐步工作流配置说明。
+
+<img src="/img/tutorial/flux/flux_example.png" alt="Flux" width="2048" height="1171" data-path="images/tutorial/flux/flux_example.png" />
+
+Flux 是目前最大的开源文生图模型之一，拥有 12B 参数，原始文件大小约为23GB。它由 [Black Forest Labs](https://blackforestlabs.ai/) 开发，该团队由前 Stable Diffusion 团队成员创立。
+Flux 以其卓越的画面质量和灵活性而闻名，能够生成高质量、多样化的图像。
+
+目前 Flux.1 模型主要有以下几个版本：
+
+* **Flux.1 Pro：** 效果最佳模型，闭源模型，仅支持通过 API 调用。
+* **[Flux.1 \[dev\]：](https://huggingface.co/black-forest-labs/FLUX.1-dev)** 开源但仅限非商业使用，从 Pro 版本蒸馏而来，效果接近Pro版。
+* **[Flux.1 \[schnell\]：](https://huggingface.co/black-forest-labs/FLUX.1-schnell)** 采用 Apache2.0 许可证，仅需4步即可生成图像，适合低配置硬件。
+
+**Flux.1 模型特点**
+
+* **混合架构：** 结合了 Transformer 网络和扩散模型的优势，有效整合文本与图像信息，提升生成图像与提示词的对齐精度，对复杂的提示词依旧有非常好的还原能力。
+* **参数规模：** Flux 拥有 12B 参数，可捕捉更复杂的模式关系，生成更逼真、多样化的图像。
+* **支持多种风格：** 支持多样化的风格，对各种类型的图像都有非常好的表现能力。
+
+在本篇示例中，我们将介绍使用 Flux.1 Dev 和 Flux.1 Schnell 两个版本进行文生图的示例，包括完整版模型和 FP8 Checkpoint 简化版本。
+
+* **Flux 完整版本：** 效果最佳，但需要较大的显存资源，需要安装多个模型文件。
+* **Flux FP8 Checkpoint：** 仅需一个 fp8 版本的模型，但是质量相对完整版会有所降低。
+
+<Tip>
+  本篇示例中的所有工作流图片的 Metadata 中已包含对应模型下载信息，使用以下方式来加载工作流：
+
+  * 直接拖入 ComfyUI
+  * 或使用菜单 `Workflows` -> `Open（ctrl+o）`
+
+  如果你使用的不是 Desktop 版本或者部分模型无法顺利下载，请参考手动安装部分保存模型文件到对应的文件夹。
+  请在开始之前确保你的 ComfyUI 已更新到最新版本。
+</Tip>
+
+## Flux.1 完整版本文生图示例
+
+<Note>
+  请注意如果你无法下载 [black-forest-labs/FLUX.1-dev](https://huggingface.co/black-forest-labs/FLUX.1-dev) 中的模型，请确保你已登录 Huggingface 并同意了对应仓库的许可协议。
+
+  <img src="/img/tutorial/flux/flux_agreement.jpg" alt="Flux 协议" width="3330" height="1854" data-path="images/tutorial/flux/flux_agreement.jpg" />
+</Note>
+
+### Flux.1 Dev
+
+<h3 id="flux_dev_checkpoint_example">
+  Flux.1 Dev fp8: 文生图
+</h3>
+
+使用 Flux.1 Dev fp8 量化版生成图像。适用于显存有限的设备，仅需一个模型文件，但与完整版相比图像质量略有下降。
+
+<img src="/img/external/raw-githubusercontent-com/templates/flux_dev_checkpoint_example-1.webp" alt="Flux.1 Dev fp8 工作流预览" />
+
+<CardGroup cols={2}>
+  <Card title="在 Comfy Cloud 上运行" icon="cloud" href="https://cloud.comfy.org/?template=flux_dev_checkpoint_example&utm_source=docs&utm_medium=referral&utm_campaign=flux-1-text-to-image">
+    在 Comfy Cloud 上运行此工作流
+  </Card>
+
+  <Card title="下载工作流" icon="download" href="https://github.com/Comfy-Org/workflow_templates/blob/main/templates/flux_dev_checkpoint_example.json">
+    下载 JSON，或在模板库中搜索「Flux.1 Dev fp8」
+  </Card>
+</CardGroup>
+
+**输出示例**
+
+![Flux.1 Dev fp8 输出示例](/img/external/raw-githubusercontent-com/output/flux_dev_checkpoint_example.png)
+
+#### 1. 工作流文件
+
+#### 2. 手动安装模型
+
+<Note>
+  * `flux1-dev.safetensors` 文件需要同意 [black-forest-labs/FLUX.1-dev](https://huggingface.co/black-forest-labs/FLUX.1-dev) 的协议后，通过浏览器下载。
+  * 如果显存较低，可以尝试使用 [t5xxl\_fp8\_e4m3fn.safetensors](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/t5xxl_fp8_e4m3fn.safetensors?download=true) 替换 `t5xxl_fp16.safetensors` 文件。
+</Note>
+
+请下载以下模型文件：
+
+* [clip\_l.safetensors](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/clip_l.safetensors?download=true)
+* [t5xxl\_fp16.safetensors](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/t5xxl_fp16.safetensors?download=true) 推荐显存大于 32GB 时使用。
+* [ae.safetensors](https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/ae.safetensors?download=true)
+* [flux1-dev.safetensors](https://huggingface.co/black-forest-labs/FLUX.1-dev/blob/main/flux1-dev.safetensors)
+
+存储位置：
+
+```
+ComfyUI/
+├── models/
+│   ├── text_encoders/
+│   │   ├── clip_l.safetensors
+│   │   └── t5xxl_fp16.safetensors
+│   ├── vae/
+│   │   └── ae.safetensors
+│   └── diffusion_models/
+│       └── flux1-dev.safetensors
+```
+
+#### 3. 运行工作流步骤
+
+请参考下图确保所有模型文件正确加载
+
+<img src="/img/tutorial/flux/flow_diagram_flux_dev_t5fp16.jpg" alt="ComfyUI Flux Dev 工作流" width="3000" height="1564" data-path="images/tutorial/flux/flow_diagram_flux_dev_t5fp16.jpg" />
+
+1. 确保 `DualCLIPLoader` 节点已加载以下模型：
+   * clip\_name1: t5xxl\_fp16.safetensors
+   * clip\_name2: clip\_l.safetensors
+2. 确保 `Load Diffusion Model` 节点已加载 `flux1-dev.safetensors`
+3. 确保 `Load VAE` 节点已加载 `ae.safetensors`
+4. 点击 `Queue` 按钮，或使用快捷键 `Ctrl(cmd) + Enter` 运行工作流
+
+<Tip>
+  得益于 Flux 出色的提示跟随能力，我们不需要任何负面提示。
+</Tip>
+
+### Flux.1 Schnell
+
+<h3 id="flux_schnell">
+  Flux.1 Schnell FP8
+</h3>
+
+使用 Flux.1 Schnell fp8 量化版快速生成图像。非常适合低端硬件，仅需 4 步即可生成图像。
+
+<img src="/img/external/raw-githubusercontent-com/templates/flux_schnell-1.webp" alt="Flux.1 Schnell FP8 工作流预览" />
+
+<CardGroup cols={2}>
+  <Card title="在 Comfy Cloud 上运行" icon="cloud" href="https://cloud.comfy.org/?template=flux_schnell&utm_source=docs&utm_medium=referral&utm_campaign=flux-1-text-to-image">
+    在 Comfy Cloud 上运行此工作流
+  </Card>
+
+  <Card title="下载工作流" icon="download" href="https://github.com/Comfy-Org/workflow_templates/blob/main/templates/flux_schnell_full_text_to_image.json">
+    下载 JSON，或在模板库中搜索「Flux.1 Schnell」
+  </Card>
+</CardGroup>
+
+#### 1. 工作流文件
+
+#### 2. 手动安装模型
+
+<Note>
+  在此工作流中，只有两个模型文件与 Flux1 Dev 版本工作流不同。对于 t5xxl，你仍然可以使用 fp16 版本以获得更好的效果。
+
+  * **t5xxl\_fp16.safetensors** -> **t5xxl\_fp8.safetensors**
+  * **flux1-dev.safetensors** -> **flux1-schnell.safetensors**
+</Note>
+
+完整模型文件列表：
+
+* [clip\_l.safetensors](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/clip_l.safetensors?download=true)
+* [t5xxl\_fp8\_e4m3fn.safetensors](https://huggingface.co/comfyanonymous/flux_text_encoders/blob/main/t5xxl_fp8_e4m3fn.safetensors?download=true)
+* [ae.safetensors](https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/ae.safetensors?download=true)
+* [flux1-schnell.safetensors](https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/flux1-schnell.safetensors)
+
+文件存储位置：
+
+```
+ComfyUI/
+├── models/
+│   ├── text_encoders/
+│   │   ├── clip_l.safetensors
+│   │   └── t5xxl_fp8_e4m3fn.safetensors
+│   ├── vae/
+│   │   └── ae.safetensors
+│   └── diffusion_models/
+│       └── flux1-schnell.safetensors
+```
+
+#### 3. 运行工作流步骤
+
+<img src="/img/tutorial/flux/flow_diagram_flux_schnell_t5fp8.jpg" alt="Flux Schnell 版本工作流" width="4000" height="1599" data-path="images/tutorial/flux/flow_diagram_flux_schnell_t5fp8.jpg" />
+
+1. 确保 `DualCLIPLoader` 节点已加载以下模型：
+   * clip\_name1: t5xxl\_fp8\_e4m3fn.safetensors
+   * clip\_name2: clip\_l.safetensors
+2. 确保 `Load Diffusion Model` 节点已加载 `flux1-schnell.safetensors`
+3. 确保 `Load VAE` 节点已加载 `ae.safetensors`
+4. 点击 `Queue` 按钮，或使用快捷键 `Ctrl(cmd) + Enter` 运行工作流
+
+## Flux.1 FP8 Checkpoint 版本文生图示例
+
+fp8 版本是原始 Flux.1 fp16 版本的量化版本。在一定程度上，此版本的图像质量会低于 fp16 版本，但所需的显存也更少，并且您只需安装一个模型文件即可尝试运行。
+
+### Flux.1 Dev（开发专用）
+
+<h3 id="flux_dev_full_text_to_image">
+  Flux.1 Dev：文生图
+</h3>
+
+使用 Flux Dev 完整版生成高质量图像。需要更大的显存和多个模型文件，但提供最佳提示词遵循能力。
+
+<img src="/img/external/raw-githubusercontent-com/templates/flux_dev_full_text_to_image-1.webp" alt="Flux.1 Dev 文生图工作流预览" />
+
+<CardGroup cols={2}>
+  <Card title="在 Comfy Cloud 上运行" icon="cloud" href="https://cloud.comfy.org/?template=flux_dev_full_text_to_image&utm_source=docs&utm_medium=referral&utm_campaign=flux-1-text-to-image">
+    在 Comfy Cloud 上运行此工作流
+  </Card>
+
+  <Card title="下载工作流" icon="download" href="https://github.com/Comfy-Org/workflow_templates/blob/main/templates/flux_dev_full_text_to_image.json">
+    下载 JSON 或在模板库中搜索 "Flux.1 Dev FP8"
+  </Card>
+</CardGroup>
+
+**示例输出**
+
+![Flux.1 Dev FP8 checkpoint 示例输出](/img/external/raw-githubusercontent-com/output/flux_dev_full_text_to_image.png)
+
+请下载下图并将其拖入 ComfyUI 以加载工作流。
+
+请下载 [flux1-dev-fp8.safetensors](https://huggingface.co/Comfy-Org/flux1-dev/blob/main/flux1-dev-fp8.safetensors?download=true) 并保存到 `ComfyUI/models/checkpoints/` 目录下。
+
+确保对应的 `Load Checkpoint` 节点加载了 `flux1-dev-fp8.safetensors`，然后您可以尝试运行该工作流。
+
+### Flux.1 Schnell（快速）
+
+<h3 id="flux_schnell">
+  Flux.1 Schnell FP8
+</h3>
+
+使用 Flux.1 Schnell fp8 量化版本快速生成图像。适合低端硬件，仅需 4 步即可生成图像。
+
+<img src="/img/external/raw-githubusercontent-com/templates/flux_schnell-1.webp" alt="Flux.1 Schnell FP8 checkpoint 工作流预览" />
+
+<CardGroup cols={2}>
+  <Card title="在 Comfy Cloud 上运行" icon="cloud" href="https://cloud.comfy.org/?template=flux_schnell&utm_source=docs&utm_medium=referral&utm_campaign=flux-1-text-to-image">
+    在 Comfy Cloud 上运行此工作流
+  </Card>
+
+  <Card title="下载工作流" icon="download" href="https://github.com/Comfy-Org/workflow_templates/blob/main/templates/flux_schnell.json">
+    下载 JSON 或在模板库中搜索 "Flux.1 Schnell FP8"
+  </Card>
+</CardGroup>
+
+请下载下图并将其拖入 ComfyUI 以加载工作流。
+
+请下载 [flux1-schnell-fp8.safetensors](https://huggingface.co/Comfy-Org/flux1-schnell/blob/main/flux1-schnell-fp8.safetensors?download=true) 并保存到 `ComfyUI/models/checkpoints/` 目录下。
+
+确保对应的 `Load Checkpoint` 节点加载了 `flux1-schnell-fp8.safetensors`，然后您可以尝试运行该工作流。

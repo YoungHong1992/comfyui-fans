@@ -1,71 +1,181 @@
----
-sidebar_position: 5
-title: 节点
-description: 节点的结构与组成——标题栏、输入口、输出口、参数部件
----
 
-# 节点（Node）
+# 节点
 
-节点是 ComfyUI 的最小功能单元：**接收输入 → 内部计算 → 产出输出**。学会「读节点」，你就读懂了任何工作流的一半。
+> 节点是 ComfyUI 的基本构建块：通过连线连接的独立 Comfy Core 或自定义模块，用来组装复杂工作流。
 
-## 节点的四个部位
+在 ComfyUI 中，节点是我们执行任务的单元，他们是构建好的一个个独立的模块，无论是 **Comfy Core** 还是 **自定义节点** ，每个节点都是一个独立的模块，有着自己独特的功能，节点之间通过连线连接，我们可以像搭乐高积木一样搭建起来复杂的功能。
+可以说，不同的节点组合构建出了 ComfyUI 的无限可能。
 
-以最常见的 **KSampler** 为例，一个典型节点从上到下依次是：
+<img src="/img/comfy_core/sampling/k_sampler.png" alt="Comfy Core K-Sampler 节点" width="974" height="1076" data-path="images/comfy_core/sampling/k_sampler.png" />
 
-```text
-┌───────────────────────────────┐
-│  KSampler                  ▣  │  ← ① 标题栏（节点名 + 折叠按钮）
-├───────────────────────────────┤
-│  model        ○               │  ← ② 输入口（左侧圆点）
-│  positive     ○               │
-│  negative     ○               │
-│  latent_image ○               │
-├───────────────────────────────┤
-│  seed           83167503      │  ← ③ 参数部件（数值框 / 下拉框 / 滑杆）
-│  steps          20            │
-│  cfg            8.0           │
-│  sampler_name   euler       ▾ │
-│  scheduler      normal      ▾ │
-│  denoise        1.0           │
-├───────────────────────────────┤
-│  LATENT       ●               │  ← ④ 输出口（右侧圆点）
-└───────────────────────────────┘
-```
+例如在 K-Sampler 节点中，你可以看到它有多个输入和输出，也同时包含多个参数设置，这些参数决定了节点执行的逻辑，它的背后是对应编写好的 Python 逻辑，从而可以让你不用去接触代码就可以实现对应的功能。
 
-| 部位 | 作用 | 备注 |
-| ---- | ---- | ---- |
-| 标题栏 | 显示节点类型名 | 双击可折叠；不同节点标题颜色不同，一眼可辨类别 |
-| 输入口 | 接收上游数据 | 圆点在**左侧**，只有连线才能填上值 |
-| 参数部件 | 手动设定数值 | 数值框、下拉框、滑杆；支持直接拖动改值或输入 |
-| 输出口 | 向下游送出结果 | 圆点在**右侧**，颜色对应数据类型 |
+<Note>
+  ComfyUI 正在持续开发中，文档中的部分内容可能已过时。如果你发现任何变化，欢迎[帮助我们更新文档](https://github.com/Comfy-Org/docs)。
+</Note>
 
-:::tip 输入口与参数部件可以互换
-很多节点的输入（如 `image`、`model`）既可以从上游连线获取，也可以在断开连线后变回一个手动参数框。**连线优先**：一旦接上连线，手动框就会被上游数据接管。
-:::
+## 节点如何运作
 
-## 内置节点的几个家族
+在计算机科学中，**节点**通常指承载信息的单元，其中往往包含用于完成某项任务的程序指令。节点很少孤立存在，在图网络中几乎总会与其他节点相连。在 ComfyUI 中，节点以可相互连接的方框形式呈现。
 
-| 家族 | 代表节点 | 职责 |
-| ---- | -------- | ---- |
-| 加载类 | Load Checkpoint / Load Image / Load VAE | 把磁盘上的模型、图片装进流水线 |
-| 编码类 | CLIP Text Encode / VAE Encode | 把文本、像素翻译成模型能消化的「向量世界」数据 |
-| 采样类 | KSampler（及各变体） | 核心计算：在潜空间里逐步去噪 |
-| 解码/保存类 | VAE Decode / Save Image / Preview Image | 把结果翻译回像素并输出 |
-| 条件加工类 | Conditioning (Combine / Set Mask…) | 拼接、裁剪、引导条件，多用于进阶玩法 |
-| 工具类 | Note / Primitive / Reroute | 便签、参数复用、理线，不参与计算但让画布更清晰 |
+ComfyUI 中的节点通常是**函数算子**：它们对数据进行处理以完成某种功能；功能可以理解为接收输入数据、对其运算并产生输出数据的过程。换句话说，节点承担具体工作，共同完成例如生成图像等任务。因此 ComfyUI 节点几乎总至少有一个输入或输出，多数情况下同时具有多个输入与输出。
 
-## 双击画布：按名字找节点
+## 节点的不同状态
 
-在画布空白处**双击**，会弹出搜索框。输入英文名（如 `VAE Decode`）即可把节点放到鼠标位置。这是除右键菜单外最常用的加节点方式。
+<img src="/img/concepts/node/status.jpg" alt="节点状态" width="3167" height="900" data-path="images/concepts/node/status.jpg" />
 
-## 读节点的三连问
+在 ComfyUI 中，节点有多种状态，下面是一些常见的节点状态：
 
-拿到陌生节点时，依次问自己：
+1. **正常(Normal)状态**： 正常状态
+2. **运行(Running)状态**： 运行中状态，通常在你开始运行工作流后，正在执行的节点会显示这个状态
+3. **错误(Error)状态**： 节点错误，通常在运行工作流后，如果对应的节点输入存在问题，导致了错误会显示这个状态，并用红色标识对应出错的输入节点，你需要解决对应出错的输入来保证工作流正常运行
+4. **丢失(Missing)状态**： 这个状态通常在你导入了一些工作流后会出现，存在两种可能
+   * ComfyCore 原生节点丢失： 这通常是因为 ComfyUI 的版本更新了，而你当前使用的 ComfyUI 版本较旧，你需要更新 ComfyUI 来解决这个问题
+   * 自定义节点丢失： 工作流使用了第三方作者开发的自定义节点，而本地尚未安装对应扩展。可使用 [ComfyUI Manager](https://docs.comfy.org/zh/manager/overview) 查找并安装，或参阅 [如何安装自定义节点](https://docs.comfy.org/zh/installation/install_custom_node) 了解其它方式
 
-1. **它需要什么输入？**（少一个连线，下游就断流）
-2. **它输出什么类型？**（决定能连向谁）
-3. **哪些参数值得我调？**（其余保持默认即可）
+## 节点之间的连接
 
-:::tip
-节点名看不懂很正常——多数名字直接来自深度学习术语（Checkpoint、CLIP、VAE……）。本站的拆解系列会对每个节点给出「人话版」职责说明，读完文生图一篇，大部分常见节点你就都眼熟了。
-:::
+在 ComfyUI 中，节点通过[连线](https://docs.comfy.org/zh/basic-concepts/links)连接，从而让相同的数据类型在不同的处理单元之间进行流转处理,从而获得最终的结果。
+
+<img src="/img/concepts/node/inpaint.jpg" alt="ComfyUI 节点连线" width="2000" height="1108" data-path="images/concepts/node/inpaint.jpg" />
+
+每个节点都会接收一些输入内容，然后经过模块处理将他们转换为对应的输出，不同的节点链接之间，必须符合数据类型规定的要求，在 ComfyUI 中，我们使用不同的颜色来区分节点的数据类型,下面是一些基础的数据类型。
+
+<img src="/img/concepts/node/data_type.jpg" alt="ComfyUI 节点数据类型" width="685" height="356" data-path="images/concepts/node/data_type.jpg" />
+
+| 数据类型        | 颜色   |
+| ----------- | ---- |
+| 扩散模型        | 薰衣草色 |
+| CLIP 模型     | 黄色   |
+| VAE 模型      | 玫瑰色  |
+| 条件化         | 橙色   |
+| 潜在图像        | 粉色   |
+| 像素图像        | 蓝色   |
+| 蒙版          | 绿色   |
+| 数字 (整数或浮点数) | 浅绿色  |
+| 网格（Mesh）    | 亮绿色  |
+
+随着 ComfyUI 的迭代，我们可能会拓展更多的数据类型，以符合更多场景的需求。
+
+### 节点之间的连接和取消连接
+
+<img src="/img/concepts/node/link_nodes.gif" alt="ComfyUI 节点连接" width="820" height="724" data-path="images/concepts/node/link_nodes.gif" />
+
+**连接**： 在上一个节点的输出点中拖拽到下一个节点相同颜色的输入中，即可连接
+**取消连接**： 在被输入的端点，点击后鼠标左键拖拽输入，即可取消连接，或者通过连线的中点菜单来取消连接。
+
+## 节点的外观
+
+<img src="/img/zh/core-concept/node/node.jpg" alt="节点外观" width="1261" height="896" data-path="images/zh/core-concept/node/node.jpg" />
+
+我们为提供了多种样式设置，你可以根据你的需求来设置节点的外观:
+
+* 修改样式
+* 双击节点标题修改节点名称
+* 通过拖拽节点任意角来缩放节点尺寸
+
+<video controls className="w-full aspect-video" src="/img/concepts/node/node_appearance.mp4" data-path="images/concepts/node/node_appearance.mp4" />
+
+### 节点标签 Badges
+
+<img src="/img/concepts/node/badge.jpg" alt="节点标签" width="1207" height="606" data-path="images/concepts/node/badge.jpg" />
+
+我们提供了多个节点标签（Badges）的显示功能，比如：
+
+* 节点ID
+* 节点来源
+
+目前 **Comfy Core 节点** 采用小狐狸的图标来展示，自定义节点则采用其名称，这样你可以快速了解到对应节点是来自哪个节点包。
+
+你可以在菜单中设置对应的显示：
+
+<img src="/img/zh/core-concept/node/badge_setting.jpg" alt="标签设置" width="1500" height="586" data-path="images/zh/core-concept/node/badge_setting.jpg" />
+
+## 节点上下文菜单
+
+节点的上下文菜单主要分为两种
+
+* 针对节点本身的上下文菜单
+* 针对输入 / 输出的上下文菜单
+
+### 节点的上下文菜单
+
+通过在节点上点击鼠标右键，你可以展开对应的节点上下文菜单，下面是对应的菜单截图：
+
+<img src="/img/zh/core-concept/node/context_menus_1.jpg" alt="节点上下文菜单" width="2000" height="1930" data-path="images/zh/core-concept/node/context_menus_1.jpg" />
+
+在节点的右键上下文菜单中你可以
+
+* 调整节点的颜色样式
+* 修改标题
+* 克隆、复制、删除节点
+* 设置节点的模式
+
+在这个菜单中，除了外观相关的设置比较重要的是下面的菜单操作
+
+* **模式（Mode）**： 设置节点的模式，Always、Never、绕过（Bypass）
+
+#### 模式（Mode）
+
+对于模式，你可能注意到目前我们提供了：Always、Never、On Event、On Trigger 四种模式，但实际上只有 **Always** 和 **Never** 是有效的，**On Event** 和 **On Trigger** 实际上是无效的，目前我们尚未完全实现这个功能，另外你可以把 **绕过（Bypass）** 也理解为一种模式，下面是对于几种可用模式的解释
+
+* **Always**： 节点默认模式，当节点首次运行或者自上一次执行后，对应输入有变化对应节点都会执行
+* **Never**： 节点在任何情况下都不会执行，就像节点被删除了，后续节点无法读取接收到任何来自它的数据
+* **绕过（Bypass）**： 节点在任何情况下都不会执行，但是后续的节点仍旧可以试着获取到未经这个节点的处理的数据
+
+下面是对于 `Never` 和 `Bypass` 模式的对比：
+
+<img src="/img/concepts/node/never_vs_bypass.jpg" alt="Never 和 Bypass 模式" width="2887" height="1016" data-path="images/concepts/node/never_vs_bypass.jpg" />
+
+在这个对比的例子中，你可以看到，两个工作流都是同时应用了两个 LoRA 模型，差异在于其中一个`Load LoRA` 节点被设置为 `Never` 模式而另一个被设置为`Bypass` 模式。
+
+* 被设置为 `Never` 模式的节点，后续的节点由于接收不到任何的输入数据而出现了报错
+* 被设置为 `Bypass` 模式的节点，后续的节点仍旧可以获取到未经这个节点处理的数据，从而加载了第一个`Load LoRA` 节点的输出数据，所以后续的工作流依旧可以正常运行
+
+### 输入 / 输出的上下文菜单
+
+这里上下文菜单主要和对应输入输出的数据类型相关
+
+<img src="/img/concepts/node/context_menus_2.jpg" alt="节点输入输出上下文菜单" width="1774" height="910" data-path="images/concepts/node/context_menus_2.jpg" />
+
+在拖动节点的输入 / 输出的时候，当有连线出现，但你未连接到其它节点的输入或输出的时候，此时释放鼠标则会弹出针对输入 / 输出的上下文菜单，用于快速添加相关类型的节点。
+你可以在设置中调整对应的节点建议的数量
+
+<img src="/img/zh/core-concept/node/node_suggestions.jpg" alt="节点建议数量" width="1000" height="314" data-path="images/zh/core-concept/node/node_suggestions.jpg" />
+
+## 节点选择工具箱
+
+<video controls className="w-full aspect-video" src="/img/concepts/node/selection_toolbox.mp4" data-path="images/concepts/node/selection_toolbox.mp4" />
+
+**节点选择工具箱（Selection tool box）** 是一个为节点提供快速操作的一个浮层工具，当你选中一个节点的时候，它会悬浮在选中的节点上方，通过这个节点你可以：
+
+* 修改节点的颜色
+* 快速设置节点为 Bypass 模式(在运行时候不执行)
+* 固定节点
+* 删除节点
+
+当然，这些功能在对应节点的右键菜单中也可以找到，节点选择工具箱只是提供了一个快捷操作，如果你想要关闭这个功能，可以在设置中关闭。
+
+<img src="/img/zh/core-concept/node/setting_selection_toolbox.jpg" alt="关闭节点选择工具箱" width="1067" height="267" data-path="images/zh/core-concept/node/setting_selection_toolbox.jpg" />
+
+## 子图
+
+你可以将选中的一组节点封装成一个可复用的子图节点，用于整理复杂画布并在不同工作流中复用同一套结构。
+
+<Card title="子图功能" icon="share-nodes" href="https://docs.comfy.org/zh/interface/features/subgraph">
+  查看如何创建与编辑子图、使用嵌套子图，以及将子图蓝图发布到节点库。
+</Card>
+
+## 自定义节点
+
+ComfyUI 默认安装中包含大量 **Comfy Core** 节点。社区还在 [自定义节点注册站](https://registry.comfy.org) 上提供了丰富的扩展。
+
+关于自定义节点的完整安装方式汇总——**ComfyUI Manager**、Git 克隆、ZIP 下载、依赖处理与安全提示——请参阅 [如何安装自定义节点](https://docs.comfy.org/zh/installation/install_custom_node)。
+
+### ComfyUI Manager
+
+日常使用自定义节点时，推荐通过 **ComfyUI Manager** 完成：从注册表搜索并安装、更新或禁用扩展包、根据导入的工作流检测缺失节点，以及配合管理模型与快照等。桌面版通常已默认启用；便携版与手动安装环境可能需要先在文档中按步骤开启 Manager。
+
+<Card title="ComfyUI Manager" icon="puzzle-piece" href="https://docs.comfy.org/zh/manager/overview">
+  功能概述、启用方式与节点安装相关流程
+</Card>

@@ -410,6 +410,12 @@ div[class^='codeBlockContainer'],
   box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
 }
 
+/* 搬运自官方的图片标签写死了 width/height 属性，限宽的同时必须保持高度自适应，否则会拉伸变形 */
+.markdown img {
+  height: auto;
+  max-width: 100%;
+}
+
 /* ============ 提示框 ============ */
 .admonition {
   border-radius: 12px;
@@ -443,4 +449,94 @@ div[class^='codeBlockContainer'],
 .footer__copyright {
   font-size: 0.82rem;
   opacity: 0.75;
+}
+
+/* ============ Mintlify 搬运组件的样式 ============ */
+.mint-card-group {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  margin: 1.2rem 0;
+}
+
+@media (min-width: 640px) {
+  .mint-card-group {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.mint-card-link {
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.mint-card-link:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.mint-card {
+  border: 1px solid var(--site-border);
+  border-radius: 12px;
+  height: 100%;
+  padding: 1rem 1.15rem;
+  transition: all 0.18s ease;
+}
+
+.mint-card-link:hover .mint-card {
+  border-color: color-mix(in srgb, var(--ifm-color-primary) 45%, var(--site-border));
+  transform: translateY(-2px);
+}
+
+.mint-card-title {
+  font-size: 0.95rem;
+  font-weight: 650;
+  margin-bottom: 0.3rem;
+}
+
+.mint-card-body {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.87rem;
+  line-height: 1.6;
+}
+
+.mint-steps {
+  padding-left: 1.4rem;
+}
+
+.mint-step {
+  margin-bottom: 0.8rem;
+}
+
+.mint-step-title {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.mint-accordion {
+  border: 1px solid var(--site-border);
+  border-radius: 10px;
+  margin-bottom: 0.6rem;
+  padding: 0.6rem 1rem;
+}
+
+.mint-accordion summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.mint-accordion-body {
+  margin-top: 0.6rem;
+}
+
+.mint-columns {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.markdown video {
+  border-radius: 12px;
+  max-width: 100%;
 }

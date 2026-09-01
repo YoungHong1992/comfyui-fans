@@ -1,0 +1,145 @@
+
+# ComfyUI ControlNet 使用示例
+
+> ComfyUI 中的 ControlNet：用条件图像控制图像生成，代替反复试错的提示词，并附带分步工作流示例。
+
+在 AI 图像生成过程中，要精确控制图像生成并不是一键容易的事情，通常需要通过许多次的图像生成才可能生成满意的图像，但随着 **ControlNet** 的出现，这个问题得到了很好的解决。
+
+ControlNet 是一种基于扩散模型（如 Stable Diffusion）的条件控制生成模型，最早由[Lvmin Zhang](https://lllyasviel.github.io/)与 Maneesh Agrawala 等人于 2023 年提出[Adding Conditional Control to Text-to-Image Diffusion Models](https://arxiv.org/abs/2302.05543)
+
+ControlNet 模型通过引入多模态输入条件（如边缘检测图、深度图、姿势关键点等），显著提升了图像生成的可控性和细节还原能力。
+使得我们可以进一步开始控制图像的风格、细节、人物姿势、画面结构等等，这些限定条件让图像生成变得更加可控，在绘图过程中也可以同时使用多个 ControlNet 模型，以达到更好的效果。
+
+在没有 ControlNet 之前，我们每次只能让模型生成图像，直到生成我们满意的图像，充满了随机性。
+
+<img src="/img/tutorial/controlnet/generated_with_random_seed.jpg" alt="ComfyUI 随机种子生成的图片" width="1024" height="1024" data-path="images/tutorial/controlnet/generated_with_random_seed.jpg" />
+
+但随着 ControlNet 的出现，我们可以通过引入额外的条件，来控制图像的生成，比如我们可以使用一张简单的涂鸦，来控制图像的生成，就可以生成差不多类似的图片。
+
+<img src="/img/tutorial/controlnet/scribble_example.jpg" alt="ComfyUI 涂鸦控制图像生成" width="1024" height="512" data-path="images/tutorial/controlnet/scribble_example.jpg" />
+
+在本示例中，我们将引导你完成在 [ComfyUI](https://github.com/Comfy-Org/ComfyUI) 中 ControlNet 模型的安装与使用, 并完成一个涂鸦控制图像生成的示例。
+
+![ComfyUI ControlNet 工作流](/img/external/raw-githubusercontent-com/controlnet/scribble_controlnet.png)
+
+<Tip>
+  ControlNet V1.1 其它类型的 ControlNet 模型的工作流也与都与本篇示例相同，你只需要根据需要选择对应的模型和上传对应的参考图即可。
+</Tip>
+
+## ControlNet 图片预处理相关说明
+
+不同类型的 ControlNet 模型，通常需要使用不同类型的参考图：
+
+![参考图](/img/external/github-com/examples/CNAuxBanner.jpg)
+
+> 图源：[ComfyUI ControlNet aux](https://github.com/Fannovel16/comfyui_controlnet_aux)
+
+由于目前 **Comfy Core** 节点中，不包含所有类型的 **预处理器** 类型，但在本文档的实际示例中，我们都将提供已经经过处理后的图片，
+但在实际使用过程中，你可能需要借助一些自定义节点来对图片进行预处理，以满足不同 ControlNet 模型的需求，下面是一些相关的插件
+
+* [ComfyUI-Advanced-ControlNet](https://github.com/Kosinkadink/ComfyUI-Advanced-ControlNet)
+* [ComfyUI ControlNet aux](https://github.com/Fannovel16/comfyui_controlnet_aux)
+
+## ComfyUI ControlNet 工作流示例讲解
+
+### 1. ControlNet 工作流素材
+
+请下载下面的工作流图片，拖入 ComfyUI 以加载工作流：
+
+![ComfyUI 工作流 - ControlNet](/img/external/raw-githubusercontent-com/controlnet/scribble_controlnet.png)
+
+<Tip>
+  元数据中包含工作流 JSON 的图片可直接拖入 ComfyUI，或使用菜单 `Workflows` -> `Open (ctrl+o)` 加载对应的工作流。
+  该图片已包含对应模型的下载链接，直接拖入 ComfyUI 将会自动提示下载。
+</Tip>
+
+请下载下面的图片，我们将其用作输入：
+
+![ComfyUI 涂鸦图像](/img/external/raw-githubusercontent-com/controlnet/scribble_input.png)
+
+### 2. 手动模型安装
+
+<Note>
+  如果你的网络无法顺利完成对应模型的自动下载，请尝试手动下载下面的模型，并将其放置到指定目录中：
+</Note>
+
+* [dreamCreationVirtual3DECommerce\_v10.safetensors](https://civitai.com/api/download/models/731340?type=Model\&format=SafeTensor\&size=full\&fp=fp16)
+* [vae-ft-mse-840000-ema-pruned.safetensors](https://huggingface.co/stabilityai/sd-vae-ft-mse-original/blob/main/vae-ft-mse-840000-ema-pruned.safetensors?download=true)
+* [control\_v11p\_sd15\_scribble\_fp16.safetensors](https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/blob/main/control_v11p_sd15_scribble_fp16.safetensors?download=true)
+
+```
+ComfyUI/
+├── models/
+│   ├── checkpoints/
+│   │   └── dreamCreationVirtual3DECommerce_v10.safetensors
+│   ├── vae/
+│   │   └── vae-ft-mse-840000-ema-pruned.safetensors
+│   └── controlnet/
+│       └── control_v11p_sd15_scribble_fp16.safetensors
+```
+
+<Note>
+  本示例中也可以使用 dreamCreationVirtual3DECommerce\_v10.safetensors 内置的 VAE 模型，但我们遵循模型作者的建议，使用单独的 VAE 模型。
+</Note>
+
+### 3. 按步骤执行工作流
+
+<img src="/img/tutorial/controlnet/flow_diagram_scribble.png" alt="ComfyUI 工作流 - ControlNet 流程图" width="2000" height="1086" data-path="images/tutorial/controlnet/flow_diagram_scribble.png" />
+
+1. 确保 `Load Checkpoint` 可以加载 **dreamCreationVirtual3DECommerce\_v10.safetensors**
+2. 确保 `Load VAE` 可以加载 **vae-ft-mse-840000-ema-pruned.safetensors**
+3. 在 `Load Image` 节点中点击 `Upload`，上传之前提供的输入图像
+4. 确保 `Load ControlNet` 可以加载 **control\_v11p\_sd15\_scribble\_fp16.safetensors**
+5. 点击 `Queue` 按钮，或使用快捷键 `Ctrl(cmd) + Enter` 执行图像生成
+
+## 相关节点讲解
+
+### Load ControlNet 节点讲解
+
+<img src="/img/comfy_core/loaders/load_controlnet_model.jpg" alt="load controlnet" width="807" height="294" data-path="images/comfy_core/loaders/load_controlnet_model.jpg" />
+
+位于`ComfyUI\models\controlnet` 的模型会被 ComfyUI 检测到，并在这个节点中识别并加载
+
+### Apply ControlNet 节点讲解
+
+<img src="/img/comfy_core/conditioning/controlnet/apply_controlnet.jpg" alt="apply controlnet " width="778" height="547" data-path="images/comfy_core/conditioning/controlnet/apply_controlnet.jpg" />
+
+这个节点接受 `load controlnet` 加载的 ControlNet 模型，并根据输入的图片，生成对应的控制条件。
+
+**输入类型**
+
+| 参数名称            | 作用                                                                |
+| --------------- | ----------------------------------------------------------------- |
+| `positive`      | 正向条件                                                              |
+| `negative`      | 负向条件                                                              |
+| `control_net`   | 要应用的controlNet模型                                                  |
+| `image`         | 用于 controlNet 应用参考的预处理器处理图片                                       |
+| `vae`           | Vae模型输入                                                           |
+| `strength`      | 应用 ControlNet 的强度，越大则 ControlNet 对生成图像的影响越大                       |
+| `start_percent` | 确定开始应用controlNet的百分比，比如取值0.2，意味着ControlNet的引导将在扩散过程完成20%时开始影响图像生成 |
+| `end_percent`   | 确定结束应用controlNet的百分比，比如取值0.8，意味着ControlNet的引导将在扩散过程完成80%时停止影响图像生成 |
+
+**输出类型**
+
+| 参数名称       | 作用                        |
+| ---------- | ------------------------- |
+| `positive` | 应用了 ControlNet 处理后的正向条件数据 |
+| `negative` | 应用了 ControlNet 处理后的负向条件数据 |
+
+你可以使用链式链接来应用多个 ControlNet 模型，如下图所示，你也可以参考 [混合 ControlNet 模型](https://docs.comfy.org/zh/tutorials/controlnet/mixing-controlnets) 部分的指南来了解更多关于混合 ControlNet 模型的使用
+
+<img src="/img/tutorial/controlnet/apply_controlnet_chain_link.jpg" alt="apply controlnet chain link" width="1500" height="1050" data-path="images/tutorial/controlnet/apply_controlnet_chain_link.jpg" />
+
+<Note>
+  你也许会在有些早期的工作流中看到如下的`Apply ControlNet(Old)` 节点，这个节点是早期 ControlNet 的节点，目前已弃用状态，默认在搜索和节点列表不可见
+
+  <img src="/img/comfy_core/conditioning/controlnet/apply_controlnet_old.jpg" alt="apply controlnet old" width="778" height="370" data-path="images/comfy_core/conditioning/controlnet/apply_controlnet_old.jpg" />
+
+  如需启用，请在**设置**--> **comfy** --> **Node** 中，启用`Show deprecated nodes in search` 选项，推荐使用新节点
+</Note>
+
+## 开始你的尝试
+
+1. 试着制作类似的涂鸦图片，甚至自己手绘，并使用 ControlNet 模型生成图像，体验 ControlNet 带来的乐趣
+2. 调整 Apply ControlNet 节点的 `Control Strength` 参数，来控制 ControlNet 模型对生成图像的影响
+3. 访问 [ControlNet-v1-1\_fp16\_safetensors](https://huggingface.co/comfyanonymous/ControlNet-v1-1_fp16_safetensors/tree/main)  仓库下载其它类型的 ControlNet 模型，并尝试使用它们生成图像

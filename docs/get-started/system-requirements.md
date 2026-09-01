@@ -1,0 +1,75 @@
+
+# 系统要求
+
+> 安装和运行 ComfyUI 的硬件和软件要求
+
+在本篇我们将介绍安装 ComfyUI 的系统要求，由于 ComfyUI 的更新频繁，本篇文档未必能够及时更新，请参考[ComfyUI](https://github.com/Comfy-Org/ComfyUI)中的相关说明。
+
+无论是哪个版本的 ComfyUI，都是运行在一个独立的 Python 环境中。
+
+### 支持的操作系统
+
+目前我们支持以下操作系统：
+
+* Windows
+* Linux
+* macOS（支持 Apple Silicon，如 M 系列）
+
+确认系统满足要求后，请前往[安装方式怎么选](/docs/get-started/install/overview)，选择适合你系统和硬件的安装方式。
+
+### Python 版本
+
+* **Python 3.13** 支持良好，推荐使用
+* Python 3.14 可用，但部分自定义节点可能存在问题。自由线程版本可以运行，但某些依赖会启用 GIL，因此尚未完全支持
+* 如果某些自定义节点在 3.13 上有依赖问题，Python 3.12 是一个不错的备选
+
+### 浏览器要求
+
+为获得最佳体验，请使用 **Google Chrome 143 或更高版本**。Chrome 142 及更早版本存在已知问题，可能导致 ComfyUI 出现视觉故障和性能问题。
+
+### 支持的硬件
+
+* **NVIDIA 显卡** - 安装稳定版 PyTorch（CUDA 13.0）：`pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu130`
+* **AMD 显卡（Linux）** - ROCm 7.2 稳定版或 nightly 版
+* **AMD 显卡（Windows/Linux，仅 RDNA 3/3.5/4）** - 实验性支持 RX 7000 系列（RDNA 3）、Strix Halo/Ryzen AI Max+ 365（RDNA 3.5）和 RX 9000 系列（RDNA 4）
+* **Intel 显卡** - Arc 系列，原生支持 PyTorch torch.xpu
+* **Apple Silicon** - M1/M2/M3/M4 系列，支持 Metal 加速
+* **Ascend NPU** - 通过 torch\_npu 扩展
+* **Cambricon MLU** - 通过 torch\_mlu 扩展
+* **Iluvatar Corex** - 通过 Iluvatar Extension for PyTorch
+* **CPU** - 使用 `--cpu` 参数（速度较慢）
+
+请参考[ComfyUI Windows 和 Linux 手动安装章节](https://github.com/Comfy-Org/ComfyUI?tab=readme-ov-file#manual-install-windows-linux)了解详细的安装步骤。
+
+<Note>
+  支持 PyTorch 2.7 及以上版本，但强烈建议使用更新的版本。Nvidia 20 系列及以上 GPU 需要 cu130 或更高版本的 PyTorch。某些功能和优化可能仅在较新版本上可用。我们通常建议使用最新主要版本的 PyTorch 和最新 CUDA 版本，除非发布时间不足两周。
+
+  Windows 便携版目前附带 Python 3.13 和 PyTorch CUDA 13.0。如果无法启动，请更新您的 NVIDIA 驱动程序。
+</Note>
+
+### 依赖
+
+* 安装 PyTorch（根据您的硬件选择对应版本）
+* 安装 ComfyUI 的 requirements.txt 中所有依赖：`pip install -r requirements.txt`
+
+<Card title="手动安装" icon="book" href="/docs/get-started/install/manual">
+  请参考手动安装章节了解详细的安装步骤。
+</Card>
+
+## 常见问题
+
+<Accordion title="ComfyUI 是否支持 MLX（Apple 的机器学习框架）？">
+  ComfyUI 不直接使用 MLX。在 Apple Silicon（M1/M2/M3/M4）Mac 上，ComfyUI 使用 PyTorch 的 **MPS（Metal Performance Shaders）** 后端，利用 Apple 的 Metal 图形框架进行 GPU 加速。
+
+  MLX 是 Apple 为 Apple Silicon 设计的一个独立的机器学习数组框架。ComfyUI 基于 PyTorch 架构，所以使用 MPS 而非 MLX。
+
+  要验证 MPS 是否在你的 Mac 上正常工作：
+
+  ```bash theme={null}
+  python -c "import torch; print(torch.backends.mps.is_available())"
+  ```
+</Accordion>
+
+<Note>
+  **Docker：** ComfyUI 不提供官方 Docker 镜像。若需在容器中运行，请自行在 [Docker Hub](https://hub.docker.com) 搜索社区维护的镜像，但**这些均非 ComfyUI 官方镜像**，也不受 ComfyUI 团队支持，请自行评估风险后使用。
+</Note>

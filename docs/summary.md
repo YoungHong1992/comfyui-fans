@@ -6,7 +6,7 @@ description: 全站知识总复盘——学习地图、参数速查表、故障�
 
 # 总结：学习路线与进阶
 
-这是全站的「总」——把每一篇拆解收拢成一张地图。读完这篇，你应该能自信地说：给我任何一张 ComfyUI 工作流截图，我都能顺着连线讲出它在做什么。
+这是全站的收尾——把每一篇教程收拢成一张地图。读完这篇，你应该能自信地说：给我任何一张 ComfyUI 工作流截图，我都能顺着连线讲出它在做什么。
 
 ## 🗺️ 全站学习地图
 
@@ -27,15 +27,15 @@ flowchart TD
 | 主题 | 一句话内核 | 详见 |
 | ---- | ---------- | ---- |
 | 工作流 | 数据沿连线单向流动，节点是加工车间 | [工作流](/docs/concepts/workflow) |
-| 连线 | 颜色即类型，同色才能相连 | [连线](/docs/concepts/connections) |
+| 连线 | 颜色即类型，同色才能相连 | [连线](/docs/concepts/links) |
 | Checkpoint | 发动机 UNet + 翻译官 CLIP + 冲洗工 VAE 三件套 | [模型](/docs/concepts/models) |
-| 文生图 | 文本 + 噪声底片 → 去噪 → 解码 | [文生图拆解](/docs/tutorials/t2i) |
-| 图生图 | denoise 是「保留度」的反向旋钮 | [图生图](/docs/tutorials/i2i) |
-| 重绘 | 遮罩圈地，锚住圈外像素 | [局部重绘](/docs/tutorials/inpaint) |
-| 放大 | 小图生成、二次采样补细节 | [高清放大](/docs/tutorials/upscale) |
-| LoRA | 插在 MODEL+CLIP 线上的低秩补丁 | [LoRA](/docs/tutorials/lora) |
-| ControlNet | 在条件线上旁路监工结构 | [ControlNet](/docs/tutorials/controlnet) |
-| 视频 | 底片变帧堆，提示词加运镜 | [视频](/docs/tutorials/video) |
+| 文生图 | 文本 + 噪声底片 → 去噪 → 解码 | [文生图](/docs/tutorials/basic/text-to-image) |
+| 图生图 | denoise 是「保留度」的反向旋钮 | [图生图](/docs/tutorials/basic/image-to-image) |
+| 重绘 | 遮罩圈地，锚住圈外像素 | [局部重绘](/docs/tutorials/basic/inpaint) |
+| 放大 | 小图生成、二次放大补细节 | [图像放大](/docs/tutorials/basic/upscale) |
+| LoRA | 插在 MODEL+CLIP 线上的低秩补丁 | [LoRA](/docs/tutorials/basic/lora) |
+| ControlNet | 在条件线上旁路监工结构 | [ControlNet](/docs/tutorials/controlnet/overview) |
+| 视频 | 底片变帧堆，提示词加运镜 | [Wan2.2 视频](/docs/tutorials/video/wan2_2) |
 
 ## 参数速查卡（截图保存）
 
@@ -62,7 +62,7 @@ flowchart TD
 - **效率**：批处理队列、Primitive 节点统一管理参数、子流程（Subgraph）封装常用模块；
 - **生态**：Manager 安装社区节点包（放大算法、分割抠图、批量遮罩……），装完按 `R` 刷新；
 - **云端**：了解 Comfy 官方云与 API 节点，把工作流交付给无卡设备调用；
-- **原理**：读懂扩散模型的去噪本质（本站 KSampler 两节是入口），再回头理解采样器差异，你会比 90% 的使用者更「知其所以然」；
+- **原理**：读懂扩散模型的去噪本质（[文生图教程](/docs/tutorials/basic/text-to-image)中对扩散模型的讲解是入口），再回头理解采样器差异，你会比 90% 的使用者更「知其所以然」；
 - **保持更新**：ComfyUI 迭代很快，以[官方文档](https://docs.comfy.org/zh)与[官方示例库](https://comfyanonymous.github.io/ComfyUI_examples/)为第一信息源。
 
 ## 结语

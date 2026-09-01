@@ -1,22 +1,48 @@
 /**
- * 站点侧边栏结构 —— 对齐官方文档的信息架构（开始使用 / 基础概念 / 界面指南 / 教程），
- * 「教程」部分替换为本站的原创「总-分-总」工作流拆解系列。
+ * 站点侧边栏结构 —— 对齐官方文档（docs.comfy.org/zh）的信息架构：
+ * 开始使用 / 基础概念 / 界面指南 / 教程。
+ * 内容为官方文档原样搬运（保留原始措辞），仅做组件映射与链接修复。
  */
 const sidebars = {
   tutorialSidebar: [
-    {
-      type: 'doc',
-      id: 'intro',
-      label: '介绍：如何使用本站',
-    },
     {
       type: 'category',
       label: '开始使用',
       collapsible: true,
       collapsed: false,
       items: [
-        'install',
-        'first-generation',
+        {
+          type: 'doc',
+          id: 'get-started/intro',
+          label: '介绍',
+        },
+        'get-started/system-requirements',
+        {
+          type: 'category',
+          label: '安装 ComfyUI',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            'get-started/install/overview',
+            'get-started/install/desktop',
+            'get-started/install/portable',
+            'get-started/install/manual',
+          ],
+        },
+        'get-started/first-generation',
+        'get-started/shared-models',
+        'get-started/update',
+        {
+          type: 'category',
+          label: '自定义节点与 Manager',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            'get-started/custom-nodes/install',
+            'get-started/custom-nodes/manager',
+            'get-started/custom-nodes/manager-install',
+          ],
+        },
       ],
     },
     {
@@ -27,8 +53,11 @@ const sidebars = {
       items: [
         'concepts/workflow',
         'concepts/nodes',
-        'concepts/connections',
+        'concepts/links',
         'concepts/models',
+        'concepts/custom-nodes',
+        'concepts/dependencies',
+        'concepts/properties',
       ],
     },
     {
@@ -36,27 +65,64 @@ const sidebars = {
       label: '界面指南',
       collapsible: true,
       collapsed: false,
-      items: ['interface/overview'],
+      items: [
+        'interface/overview',
+        'interface/maskeditor',
+        'interface/template',
+        'interface/shortcuts',
+      ],
     },
     {
       type: 'category',
-      label: '官方工作流拆解（总-分-总）',
+      label: '教程',
       collapsible: true,
       collapsed: false,
       items: [
-        'tutorials/t2i',
-        'tutorials/i2i',
-        'tutorials/inpaint',
-        'tutorials/upscale',
-        'tutorials/lora',
-        'tutorials/controlnet',
-        'tutorials/video',
+        {
+          type: 'category',
+          label: '基础示例',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            'tutorials/basic/text-to-image',
+            'tutorials/basic/image-to-image',
+            'tutorials/basic/inpaint',
+            'tutorials/basic/outpaint',
+            'tutorials/basic/upscale',
+            'tutorials/basic/lora',
+            'tutorials/basic/multiple-loras',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'ControlNet',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            'tutorials/controlnet/overview',
+            'tutorials/controlnet/pose-controlnet-2-pass',
+            'tutorials/controlnet/depth-controlnet',
+            'tutorials/controlnet/mixing-controlnets',
+          ],
+        },
+        'tutorials/utility/preprocessors',
+        {
+          type: 'category',
+          label: '模型专题',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            'tutorials/flux/flux-1-text-to-image',
+            'tutorials/qwen/qwen-image',
+            'tutorials/video/wan2_2',
+          ],
+        },
       ],
     },
     {
       type: 'doc',
       id: 'summary',
-      label: '总结：学习路线与进阶',
+      label: '学习总结',
     },
   ],
 };

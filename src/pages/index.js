@@ -65,24 +65,24 @@ export default function Home() {
       <main className="container">
         {/* ===== Hero ===== */}
         <div className="hero-banner">
-          <span className="hero-badge">基于官方教程的原创拆解 · 总—分—总教学结构</span>
+          <span className="hero-badge">官方中文文档 · 原样搬运</span>
           <h1 className="hero-title">
             ComfyUI Fans
             <br />
             <span className="hero-title-sub">
-              以「总—分—总」拆解官方工作流，让每位爱好者都能学会
+              让每一位爱好者都能学会 ComfyUI
             </span>
           </h1>
           <p className="hero-sub">
             ComfyUI 是最流行的开源节点式生成式 AI 应用，可用于搭建图像、视频与音频生成工作流。
-            本站参照官方文档的信息架构，用「总—分—总」的方式逐节点拆解官方工作流，零基础也能一路学到底。
+            本站对齐官方文档的信息架构，原样搬运官方中文教程内容；后续将推出逐节点的原创拆解文章。
           </p>
           <div className="hero-actions">
-            <Link className="button button--lg btn-primary-lg" to="/docs/intro">
+            <Link className="button button--lg btn-primary-lg" to="/docs/get-started/intro">
               从零开始学习
             </Link>
-            <Link className="button button--lg btn-accent" to="/docs/tutorials/t2i">
-              直达工作流拆解 →
+            <Link className="button button--lg btn-accent" to="/docs/tutorials/basic/text-to-image">
+              直达文生图教程 →
             </Link>
           </div>
         </div>
@@ -93,28 +93,28 @@ export default function Home() {
           title="开始使用"
           desc="五分钟完成安装，跑出你的第一张 AI 生成图像。"
         >
-          <Card icon="download" title="安装 ComfyUI" desc="Windows / macOS / Linux 三大平台的安装方式、显卡与内存要求，一页说清。" to="/docs/install" />
-          <Card icon="sparkles" title="首次生成图像" desc="认识默认工作流的六个节点，按下队列按钮，生成属于你的第一张图。" to="/docs/first-generation" />
+          <Card icon="download" title="系统要求与安装" desc="Windows / macOS / Linux 三大平台的安装方式、显卡与内存要求。" to="/docs/get-started/system-requirements" />
+          <Card icon="sparkles" title="首次生成图像" desc="认识默认工作流的六个节点，按下队列按钮，生成属于你的第一张图。" to="/docs/get-started/first-generation" />
+          <Card icon="puzzle" title="安装自定义节点" desc="用 ComfyUI-Manager 安装社区节点，解锁完整生态。" to="/docs/get-started/custom-nodes/install" />
           <Card icon="flow" title="工作流：节点式编程" desc="为什么 ComfyUI 用「节点 + 连线」组织生成流程？数据如何在节点间流动？" to="/docs/concepts/workflow" />
           <Card icon="monitor" title="界面指南" desc="画布、菜单、队列、节点库……官方界面的每个区域都有什么用？" to="/docs/interface/overview" />
-          <Card icon="puzzle" title="节点详解" desc="节点的标题栏、输入口、输出口与参数部件，学会读节点就能读懂一切。" to="/docs/concepts/nodes" />
-          <Card icon="grid" title="连线与数据类型" desc="六种颜色的连线对应六种数据类型，颜色相同才能相连。" to="/docs/concepts/connections" />
+          <Card icon="grid" title="连线与数据类型" desc="连线颜色对应不同的数据类型，颜色相同才能相连。" to="/docs/concepts/links" />
         </Section>
 
-        {/* ===== 官方工作流拆解 ===== */}
+        {/* ===== 官方教程 ===== */}
         <Section
           icon="book"
           color="#c2410c"
-          title="官方工作流拆解（总 — 分 — 总）"
-          desc="每一篇都按「总览 → 逐节点拆解 → 总结」的结构展开，对齐官方教程工作流，学完即可举一反三。"
+          title="官方教程"
+          desc="对齐官方教程目录：文生图、图生图、局部重绘、ControlNet……零基础也能一路学到底。"
         >
-          <Card icon="image" color="#2563eb" title="文生图：基础示例 ★ 必读" desc="官方最经典的入门工作流：六节点流水线、KSampler 全参数精讲。" to="/docs/tutorials/t2i" />
-          <Card icon="image" color="#2563eb" title="图生图" desc="把「空白潜空间」换成「已有图像的编码」，用降噪幅度控制改写程度。" to="/docs/tutorials/i2i" />
-          <Card icon="brush" color="#0891b2" title="局部重绘" desc="遮罩 + 降噪的组合拳：只重画画面的一角，其余原封不动。" to="/docs/tutorials/inpaint" />
-          <Card icon="grid" color="#7c3aed" title="高清放大" desc="像素放大、潜空间放大两路线，以及「先小图后放大」的省显存心法。" to="/docs/tutorials/upscale" />
-          <Card icon="palette" color="#0d9488" title="LoRA 模型微调" desc="在 Checkpoint 与 KSampler 之间插一层，为模型注入角色或画风。" to="/docs/tutorials/lora" />
-          <Card icon="flow" color="#4f46e5" title="ControlNet 构图控制" desc="用线条、深度、姿态控制画面结构，让提示词「指哪画哪」。" to="/docs/tutorials/controlnet" />
-          <Card icon="film" color="#be185d" title="视频生成工作流" desc="从图像到视频差在哪？帧数、运动幅度与官方视频工作流导览。" to="/docs/tutorials/video" />
+          <Card icon="image" color="#2563eb" title="文生图 ★ 必读" desc="官方最经典的入门工作流：加载模型、编写提示词、完成第一次生成。" to="/docs/tutorials/basic/text-to-image" />
+          <Card icon="image" color="#2563eb" title="图生图" desc="以一张已有图像为起点，用降噪幅度控制改写程度。" to="/docs/tutorials/basic/image-to-image" />
+          <Card icon="brush" color="#0891b2" title="局部重绘" desc="遮罩 + 降噪的组合拳：只重画画面的一角，其余原封不动。" to="/docs/tutorials/basic/inpaint" />
+          <Card icon="grid" color="#7c3aed" title="图像放大" desc="加载放大模型，让生成结果拥有更高分辨率。" to="/docs/tutorials/basic/upscale" />
+          <Card icon="palette" color="#0d9488" title="LoRA" desc="在 Checkpoint 之上叠加 LoRA，为模型注入角色或画风。" to="/docs/tutorials/basic/lora" />
+          <Card icon="flow" color="#4f46e5" title="ControlNet" desc="用线条、深度、姿态控制画面结构，让提示词「指哪画哪」。" to="/docs/tutorials/controlnet/overview" />
+          <Card icon="film" color="#be185d" title="视频生成工作流" desc="使用 Wan2.2 完成文生视频与图生视频。" to="/docs/tutorials/video/wan2_2" />
           <Card icon="check" color="#16a34a" title="学习总结与进阶路线" desc="全站知识点的总复盘：一张学习地图、一张参数速查表、一条进阶路径。" to="/docs/summary" />
         </Section>
 
@@ -123,11 +123,11 @@ export default function Home() {
           icon="book"
           color="#0f766e"
           title="官方资源"
-          desc="本站是教学复刻与原创讲解，遇到偏差时请以官方渠道为准。"
+          desc="本站内容搬运自官方中文文档，遇到偏差时请以官方渠道为准。"
         >
-          <Card icon="book" color="#0f766e" title="ComfyUI 官方文档" desc="docs.comfy.org —— 官方中文文档，安装、概念与最新教程的第一手来源。" to="/docs/summary" />
-          <Card icon="grid" color="#0f766e" title="官方示例工作流库" desc="comfyanonymous.github.io/ComfyUI_examples —— 官方维护的各类工作流 JSON 模板。" to="/docs/summary" />
-          <Card icon="puzzle" color="#0f766e" title="ComfyUI GitHub 仓库" desc="提问、报 Issue、下载最新版本，都在 comfyanonymous/ComfyUI。" to="/docs/summary" />
+          <Card icon="book" color="#0f766e" title="ComfyUI 官方文档" desc="docs.comfy.org —— 官方中文文档，安装、概念与最新教程的第一手来源。" to="https://docs.comfy.org/zh" />
+          <Card icon="grid" color="#0f766e" title="官方示例工作流库" desc="comfyanonymous.github.io/ComfyUI_examples —— 官方维护的各类工作流 JSON 模板。" to="https://comfyanonymous.github.io/ComfyUI_examples/" />
+          <Card icon="puzzle" color="#0f766e" title="ComfyUI GitHub 仓库" desc="提问、报 Issue、下载最新版本，都在 comfyanonymous/ComfyUI。" to="https://github.com/comfyanonymous/ComfyUI" />
         </Section>
       </main>
     </Layout>
