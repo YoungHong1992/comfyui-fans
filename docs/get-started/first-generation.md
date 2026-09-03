@@ -23,7 +23,7 @@
 
 ## 关于文生图的说明
 
-**文生图（Text to Image）**，是 AI 绘图的基础，通过输入文本描述来生成对应的图片，是 AI 绘图最常用的功能之一，你可以理解成你把你的**绘图要求(正向提示词、负向提示词)**告诉一个**画家(绘图模型)**，画家会根据你的要求，画出你想要的内容，由于本篇教程主要是为了引导你开始 ComfyUI 的使用，对于文生图的详细说明，我们将在[文生图](https://docs.comfy.org/zh/tutorials/basic/image-to-image)章节进行详细讲解
+**文生图（Text to Image）**，是 AI 绘图的基础，通过输入文本描述来生成对应的图片，是 AI 绘图最常用的功能之一，你可以理解成你把你的**绘图要求(正向提示词、负向提示词)**告诉一个**画家(绘图模型)**，画家会根据你的要求，画出你想要的内容，由于本篇教程主要是为了引导你开始 ComfyUI 的使用，对于文生图的详细说明，我们将在[文生图](/docs/tutorials/basic/text-to-image)章节进行详细讲解
 
 ## ComfyUI 文生图工作流教程讲解
 
@@ -172,7 +172,7 @@
 
 对于文生图的详细说明，下面的指南中会有详细的说明和指导
 
-<Card title="ComfyUI 文生图工作流示例说明" icon="link" href="https://docs.comfy.org/zh/tutorials/basic/text-to-image">
+<Card title="ComfyUI 文生图工作流示例说明" icon="link" href="/docs/tutorials/basic/text-to-image">
   点击这里查看文生图工作流的详细说明
 </Card>
 

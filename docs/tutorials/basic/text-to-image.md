@@ -32,7 +32,7 @@
 
 ### 1. 开始开始前的准备
 
-请确保你已经在 `ComfyUI/models/checkpoints` 文件夹至少有一个 SD1.5 的模型文件，如果你还不了解如何安装模型，请参[开始 ComfyUI 的 AI 绘图之旅](https://docs.comfy.org/zh/get_started/first_generation#3-安装绘图模型)章节中关于模型安装的部分说明。
+请确保你已经在 `ComfyUI/models/checkpoints` 文件夹至少有一个 SD1.5 的模型文件，如果你还不了解如何安装模型，请参[开始 ComfyUI 的 AI 绘图之旅](/docs/get-started/first-generation#3-安装绘图模型)章节中关于模型安装的部分说明。
 
 你可以使用下面的这些模型：
 

@@ -124,7 +124,7 @@ comfyui-workflow-templates==0.1.52
 comfyui-embedded-docs==0.2.4
 ```
 
-如果你不了解如何正确更新，请参考 [更新 ComfyUI](https://docs.comfy.org/zh/installation/update_comfyui) 章节了解如何更新 ComfyUI 和对应的依赖
+如果你不了解如何正确更新，请参考 [更新 ComfyUI](/docs/get-started/update) 章节了解如何更新 ComfyUI 和对应的依赖
 
 ## 如何向 ComfyUI 官方贡献模板？
 

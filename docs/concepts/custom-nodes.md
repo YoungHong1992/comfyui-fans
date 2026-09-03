@@ -47,7 +47,7 @@
   <TabItem value="通过 ComfyUI Manager 安装">
     由于 ComfyUI Manager 的功能非常丰富，所以在这里我们将对应的通过 ComfyUI Manager 章节单独使用一篇文档来介绍，请访问下面的链接来了解如何使用 ComfyUI Manager 来安装自定义节点。
 
-    <Card title="ComfyUI Manager 安装自定义节点" icon="link" href="https://docs.comfy.org/zh/installation/install_custom_node#方法一comfyui-manager（推荐）">
+    <Card title="ComfyUI Manager 安装自定义节点" icon="link" href="/docs/get-started/custom-nodes/install#方法一comfyui-manager推荐">
       了解如何使用 ComfyUI Manager 安装自定义节点
     </Card>
   </TabItem>
@@ -151,7 +151,7 @@
   但也许你会在某些情况下无法顺利使用 ComfyUI Manager 来安装自定义节点，所以我们提供了这部分较为详细的依赖安装说明。
 </Note>
 
-在[依赖关系](https://docs.comfy.org/zh/basic-concepts/dependencies)章节中，我们介绍了 ComfyUI 中依赖关系的相关内容，ComfyUI 是一个基于 **Python** 的项目，我们构建了一个用于运行 ComfyUI 的独立 **Python** 运行环境，所有的相关依赖都需要被安装在这个独立的 **Python** 运行环境中。
+在[依赖关系](/docs/concepts/dependencies)章节中，我们介绍了 ComfyUI 中依赖关系的相关内容，ComfyUI 是一个基于 **Python** 的项目，我们构建了一个用于运行 ComfyUI 的独立 **Python** 运行环境，所有的相关依赖都需要被安装在这个独立的 **Python** 运行环境中。
 
 如果你直接在系统级的终端运行 `pip install -r requirements.txt`，对应的依赖可能会被安装到了系统级的 **Python** 环境中，会导致对应的自定义节点在 ComfyUI 的环境中依赖还是丢失的，导致对应自定义节点无法正常运行。
 
@@ -293,7 +293,7 @@
 
 <img src="/img/concepts/core-concepts_nodes_manager.png" alt="ComfyUI 管理器界面" width="1920" height="1080" data-path="images/concepts/core-concepts_nodes_manager.png" />
 
-目前在 [Desktop 版本](https://docs.comfy.org/zh/installation/desktop/windows) 中已默认包含该工具,而在[便携（Portable）版](https://docs.comfy.org/zh/installation/comfyui_portable_windows)中，你需要参考本文档中[安装管理器](#1-安装自定义节点)章节中的说明进行安装。
+目前在 [Desktop 版本](/docs/get-started/install/desktop) 中已默认包含该工具,而在[便携（Portable）版](/docs/get-started/install/portable)中，你需要参考本文档中[安装管理器](#安装管理器)章节中的说明进行安装。
 
 <Note>
   由于随着 ComfyUI 的发展，ComfyUI Manager 在 ComfyUI 中的角色也愈加重要，目前 ComfyUI-Manager 已经正式加入 Comfy Org 组织，正式成为 ComfyUI 核心依赖的一部分，并且由原作者[Dr.Lt.Data](https://github.com/ltdrdata)继续维护，你可以查看[这篇博客](https://blog.comfy.org/p/comfyui-manager-joins-comfy-org)了解更多信息。

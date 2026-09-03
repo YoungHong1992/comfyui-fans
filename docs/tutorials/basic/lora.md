@@ -66,7 +66,7 @@
 | `model` | 输出应用了 LoRA 调整的模型       |
 | `clip`  | 输出应用了 LoRA 调整的 CLIP 模型 |
 
-该节点支持链式连接，可以将多个`Load LoRA` 节点串联来应用多个 LoRA 模型，具体请参考[ComfyUI 应用多个 LoRA 示例](https://docs.comfy.org/zh/tutorials/basic/multiple-loras)
+该节点支持链式连接，可以将多个`Load LoRA` 节点串联来应用多个 LoRA 模型，具体请参考[ComfyUI 应用多个 LoRA 示例](/docs/tutorials/basic/multiple-loras)
 
 <img src="/img/tutorial/basic/lora/chain_link.png" alt="LoRA 节点链式连接" width="1200" height="380" data-path="images/tutorial/basic/lora/chain_link.png" />
 

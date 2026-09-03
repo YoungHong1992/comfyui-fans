@@ -40,9 +40,9 @@
       请确保你的 ComfyUI 已经更新。
 
       * [ComfyUI 下载](https://www.comfy.org/download)
-      * [ComfyUI 更新教程](https://docs.comfy.org/zh/installation/update_comfyui)
+      * [ComfyUI 更新教程](/docs/get-started/update)
 
-      本指南里的工作流可以在[工作流模板](https://docs.comfy.org/zh/interface/features/template)中找到。如果找不到，可能是 ComfyUI 没有更新。
+      本指南里的工作流可以在[工作流模板](/docs/interface/template)中找到。如果找不到，可能是 ComfyUI 没有更新。
 
       如果加载工作流时有节点缺失，可能原因有：
 
@@ -313,10 +313,10 @@ Comfy Org rehost 地址： [Qwen-Image-DiffSynth-ControlNets/model\_patches](htt
 
 <img src="/img/tutorial/image/qwen/image_qwen_image_controlnet_patch-inpaint.jpg" alt="Inpaint 工作流" width="3808" height="2046" data-path="images/tutorial/image/qwen/image_qwen_image_controlnet_patch-inpaint.jpg" />
 
-对于 Inpaint 模型，它需要使用 [蒙版编辑器](https://docs.comfy.org/zh/interface/maskeditor)，来绘制一个蒙版然后作为输入控制条件
+对于 Inpaint 模型，它需要使用 [蒙版编辑器](/docs/interface/maskeditor)，来绘制一个蒙版然后作为输入控制条件
 
 1. 确保 `ModelPatchLoader` 加载的是 `qwen_image_inpaint_diffsynth_controlnet.safetensors` 模型
-2. 上传图片，并使用[蒙版编辑器](https://docs.comfy.org/zh/interface/maskeditor) 绘制蒙版，你需要将对应 `Load Image`节点的 `mask` 输出连接到 `QwenImageDiffsynthControlnet` 的 `mask` 输入才能保证对应的蒙版被加载
+2. 上传图片，并使用[蒙版编辑器](/docs/interface/maskeditor) 绘制蒙版，你需要将对应 `Load Image`节点的 `mask` 输出连接到 `QwenImageDiffsynthControlnet` 的 `mask` 输入才能保证对应的蒙版被加载
 3. 使用 `Ctrl-B` 快捷键，将原本工作流中的 Canny 设置为绕过模式，来使得对应的 Canny 节点处理不生效
 4. 在 `CLIP Text Encoder`  输入你需要将蒙版部分修改成样式
 5. 如需要可以修改 `QwenImageDiffsynthControlnet` 节点的 `strength` 强度来控制对应的控制强度

@@ -3,7 +3,7 @@
 
 > 本篇将引导你了解并完成在 ComfyUI 中同时应用多个 LoRA 模型
 
-在 [ComfyUI LoRA 使用示例](https://docs.comfy.org/zh/tutorials/basic/lora) 中，我们介绍了如何在 ComfyUI 中加载并使用 LoRA 模型，也提及了该节点支持链式连接。
+在 [ComfyUI LoRA 使用示例](/docs/tutorials/basic/lora) 中，我们介绍了如何在 ComfyUI 中加载并使用 LoRA 模型，也提及了该节点支持链式连接。
 
 <img src="/img/tutorial/basic/lora/chain_link.png" alt="LoRA 节点链式连接" width="1200" height="380" data-path="images/tutorial/basic/lora/chain_link.png" />
 

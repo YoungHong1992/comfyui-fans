@@ -104,9 +104,24 @@ h1 {
 }
 
 /* ============ 顶部导航栏 ============ */
+/*
+ * 毛玻璃效果必须放在伪元素上，不能直接写在 .navbar 上。
+ * 带 backdrop-filter 的元素会成为其 position: fixed 后代的包含块，
+ * 而窄屏移动侧边栏（.navbar-sidebar）正是 .navbar 的子元素——
+ * 一旦 .navbar 自己带 backdrop-filter，侧边栏的 top/bottom 就会
+ * 相对 63px 高的导航栏求解，菜单区高度被算成 0，点汉堡菜单没有反应。
+ */
 .navbar {
-  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--site-border);
+}
+
+.navbar::before {
+  backdrop-filter: blur(10px);
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
 }
 
 [data-theme='light'] .navbar {
@@ -134,9 +149,46 @@ h1 {
   background: var(--site-surface-hover);
 }
 
+/*
+ * 导航栏「开始学习」主行动按钮。
+ * 只在桌面导航栏内呈现按钮外观：窄屏时同一项会以 .menu__link 渲染进移动侧边栏，
+ * 那里应保持普通菜单项样式，因此这里用 .navbar__link 限定作用范围。
+ */
+.navbar__link.navbar-cta {
+  background: var(--ifm-color-primary);
+  color: #fff;
+  font-weight: 600;
+  margin-left: 0.3rem;
+  padding: 0.4rem 0.95rem;
+  transition: background var(--ifm-transition-fast) ease;
+}
+
+.navbar__link.navbar-cta:hover {
+  background: var(--ifm-color-primary-dark);
+  color: #fff;
+}
+
+[data-theme='dark'] .navbar__link.navbar-cta {
+  color: #17131f;
+}
+
+[data-theme='dark'] .navbar__link.navbar-cta:hover {
+  color: #17131f;
+}
+
 /* ============ 左侧边栏 ============ */
 .theme-doc-sidebar-container {
   border-right: 1px solid var(--site-border) !important;
+}
+
+/*
+ * 隐藏窄屏侧边栏里的「← 回到主菜单」按钮。
+ * 该按钮由 Docusaurus 的 MobileSidebar/SecondaryMenu 渲染，仅在存在二级菜单时出现；
+ * 本站只有文档页会注册二级菜单（blog 已关闭），因此这条规则实际只作用于 /docs 下。
+ * 代价：窄屏文档页不再有入口回到主菜单（开始学习 / 官方文档 / GitHub）。
+ */
+.navbar-sidebar__back {
+  display: none;
 }
 
 .theme-doc-sidebar-item-category > .menu__list-item-collapsible > .menu__link,
@@ -470,6 +522,15 @@ div[class^='codeBlockContainer'],
 
 /* intro 页卡片分区标题 */
 .intro-section h2 {
+  text-align: center;
+}
+
+/* intro 页分区补充说明（如「官方资源（站外）」的提示语） */
+.intro-section-note {
+  color: var(--ifm-color-emphasis-600);
+  font-size: 0.9rem;
+  margin: -0.6rem auto 1.4rem;
+  max-width: 34rem;
   text-align: center;
 }
 

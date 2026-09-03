@@ -126,7 +126,7 @@ ComfyUI/
 | `positive` | 应用了 ControlNet 处理后的正向条件数据 |
 | `negative` | 应用了 ControlNet 处理后的负向条件数据 |
 
-你可以使用链式链接来应用多个 ControlNet 模型，如下图所示，你也可以参考 [混合 ControlNet 模型](https://docs.comfy.org/zh/tutorials/controlnet/mixing-controlnets) 部分的指南来了解更多关于混合 ControlNet 模型的使用
+你可以使用链式链接来应用多个 ControlNet 模型，如下图所示，你也可以参考 [混合 ControlNet 模型](/docs/tutorials/controlnet/mixing-controlnets) 部分的指南来了解更多关于混合 ControlNet 模型的使用
 
 <img src="/img/tutorial/controlnet/apply_controlnet_chain_link.jpg" alt="apply controlnet chain link" width="1500" height="1050" data-path="images/tutorial/controlnet/apply_controlnet_chain_link.jpg" />
 

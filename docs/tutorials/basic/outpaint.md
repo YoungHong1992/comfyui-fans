@@ -15,7 +15,7 @@
 
 这就像让 **画家(AI 绘图模型)** 在已有的画作基础上，向外延伸绘制更大的场景。我们需要告诉画家 **需要扩展的方向和范围**，画家会根据已有的画面内容，合理地延伸和扩展场景。
 
-基本上它要求的内容与[局部重绘](https://docs.comfy.org/zh/tutorials/basic/inpaint)相似，只不过我们用来**构建遮罩（Mask）的节点不同**
+基本上它要求的内容与[局部重绘](/docs/tutorials/basic/inpaint)相似，只不过我们用来**构建遮罩（Mask）的节点不同**
 
 扩图的应用场景包括：
 
@@ -29,7 +29,7 @@
 
 #### 1. 模型安装
 
-请确保你已经在 `ComfyUI/models/checkpoints` 文件夹至少有一个 SD1.5 的模型文件，如果你还不了解如何安装模型，请参[开始 ComfyUI 的 AI 绘图之旅](https://docs.comfy.org/zh/get_started/first_generation#3-安装绘图模型)章节中关于模型安装的部分说明。
+请确保你已经在 `ComfyUI/models/checkpoints` 文件夹至少有一个 SD1.5 的模型文件，如果你还不了解如何安装模型，请参[开始 ComfyUI 的 AI 绘图之旅](/docs/get-started/first-generation#3-安装绘图模型)章节中关于模型安装的部分说明。
 
 你可以使用下面的这些模型：
 
@@ -61,7 +61,7 @@
 2. 请在 `加载图片(Load Image)` 节点中点击 `Upload` 按钮上传
 3. 点击 `Queue` 按钮，或者使用快捷键 `Ctrl + Enter(回车)` 来执行图片生成
 
-在这个工作流中主要是通过 `Pad Image for outpainting` 节点来控制图片的扩展方向和范围，其实这也是一个 [局部重绘(Inpaint)](https://docs.comfy.org/zh/tutorials/basic/inpaint) 工作流，只不过我们用来构建遮罩（Mask）的节点不同。
+在这个工作流中主要是通过 `Pad Image for outpainting` 节点来控制图片的扩展方向和范围，其实这也是一个 [局部重绘(Inpaint)](/docs/tutorials/basic/inpaint) 工作流，只不过我们用来构建遮罩（Mask）的节点不同。
 
 ### Pad Image for outpainting 节点
 

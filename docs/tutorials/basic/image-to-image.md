@@ -20,7 +20,7 @@
 打个比方来解释：
 这就像请一位艺术家根据你的参考图像来创作一件特定作品。
 
-如果你仔细将这个教程与[文生图](https://docs.comfy.org/zh/tutorials/basic/text-to-image)教程进行比较，
+如果你仔细将这个教程与[文生图](/docs/tutorials/basic/text-to-image)教程进行比较，
 你就会发现图生图的流程与文生图非常相似，
 只是多了一个输入参考图像作为条件。在文生图中，我们让艺术家（图像模型）根据提示词自由创作；
 而在图生图中，我们让艺术家同时根据参考图像和提示词进行创作。
@@ -65,7 +65,7 @@
 
 这是因为 `denoise` 决定了在将参考图像转换之后，添加到 Latent空间图像中的噪波强度。如果 `denoise` 为 1，Latent空间图像将变为完全随机的噪波，使其与 `空Latent图像` 节点生成的Latent空间相同，从而丢失参考图像的所有特征。
 
-相关原理请参阅[文生图](https://docs.comfy.org/zh/tutorials/basic/text-to-image)教程中的原理说明。
+相关原理请参阅[文生图](/docs/tutorials/basic/text-to-image)教程中的原理说明。
 
 ## 开始你自己的尝试
 

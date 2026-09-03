@@ -52,34 +52,12 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
-          { to: '/docs/get-started/intro', label: '开始使用', position: 'left' },
           {
-            type: 'dropdown',
-            label: '官方教程',
-            position: 'left',
-            items: [
-              { to: '/docs/tutorials/basic/text-to-image', label: '文生图：基础示例' },
-              { to: '/docs/tutorials/basic/image-to-image', label: '图生图' },
-              { to: '/docs/tutorials/basic/inpaint', label: '局部重绘' },
-              { to: '/docs/tutorials/basic/upscale', label: '图像放大' },
-              { to: '/docs/tutorials/basic/lora', label: 'LoRA' },
-              { to: '/docs/tutorials/controlnet/overview', label: 'ControlNet' },
-              { to: '/docs/tutorials/video/wan2_2', label: 'Wan2.2 视频生成' },
-            ],
+            to: '/docs/get-started/intro',
+            label: '开始学习',
+            position: 'right',
+            className: 'navbar-cta',
           },
-          {
-            type: 'dropdown',
-            label: '基础概念',
-            position: 'left',
-            items: [
-              { to: '/docs/concepts/workflow', label: '工作流：节点式可视化编程' },
-              { to: '/docs/concepts/nodes', label: '节点' },
-              { to: '/docs/concepts/links', label: '连线' },
-              { to: '/docs/concepts/models', label: '模型' },
-            ],
-          },
-          { to: '/docs/interface/overview', label: '界面指南', position: 'left' },
-          { to: '/docs/summary', label: '学习总结', position: 'left' },
           {
             href: 'https://docs.comfy.org/zh',
             label: '官方文档 ↗',

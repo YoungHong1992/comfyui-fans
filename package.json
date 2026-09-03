@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "docusaurus start --no-open --host 127.0.0.1 --port 3000",
     "build": "docusaurus build",
-    "serve": "docusaurus serve"
+    "serve": "docusaurus serve",
+    "check:links": "node scripts/check-internal-links.js"
   },
   "dependencies": {
     "@docusaurus/core": "^3.7.0",

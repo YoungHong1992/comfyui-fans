@@ -107,7 +107,7 @@ pip install -r requirements.txt
 
 你需要在你的 ComfyUI Python 环境中进入对应插件的目录，然后执行 `pip install -r requirements.txt` 来安装对应的依赖。
 
-如果你使用的是 [Windows 便携版](https://docs.comfy.org/zh/installation/comfyui_portable_windows)，你可以在便携版的 `ComfyUI_windows_portable` 目录下使用以下指令：
+如果你使用的是 [Windows 便携版](/docs/get-started/install/portable)，你可以在便携版的 `ComfyUI_windows_portable` 目录下使用以下指令：
 
 ```
 python_embeded\python.exe -m pip install -r ComfyUI\custom_nodes\<custom_node_name>\requirements.txt

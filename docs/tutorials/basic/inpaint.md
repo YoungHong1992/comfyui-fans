@@ -100,7 +100,7 @@
 
 ## 局部重绘制相关节点
 
-通过[文生图](https://docs.comfy.org/zh/tutorials/basic/text-to-image)、[图生图](https://docs.comfy.org/zh/tutorials/basic/image-to-image) 和本篇的工作流对比，我想你应该可以看到这几个工作流主要的差异都在于 VAE 部分这部分的条件输入,
+通过[文生图](/docs/tutorials/basic/text-to-image)、[图生图](/docs/tutorials/basic/image-to-image) 和本篇的工作流对比，我想你应该可以看到这几个工作流主要的差异都在于 VAE 部分这部分的条件输入,
 在这个工作流中我们使用到的是 **VAE 内部编码器** 节点，这个节点是专门用于局部重绘的节点，它可以帮助我们更好地控制生成区域，从而获得更好的生成效果。
 
 <img src="/img/comfy_core/latent/inpaint/vae_encode_for_inpainting.jpg" alt="VAE Encoder (for Inpainting) 节点" width="854" height="440" data-path="images/comfy_core/latent/inpaint/vae_encode_for_inpainting.jpg" />

@@ -38,7 +38,7 @@ ComfyUI 会将这些步骤显示为画布上的方框。
 
 你可以通过不同的方式组合节点来创建不同的工作流。你无需编写代码即可使用它们。
 
-了解更多关于节点的信息，请参阅 [节点](https://docs.comfy.org/zh/basic-concepts/nodes)。
+了解更多关于节点的信息，请参阅 [节点](/docs/concepts/nodes)。
 
 ## 连线在节点之间传递数据
 
@@ -48,7 +48,7 @@ ComfyUI 会将这些步骤显示为画布上的方框。
 
 只有兼容的数据类型才能连接。例如，图像输出不能直接连接到期望接收数字的输入。
 
-在[连线](https://docs.comfy.org/zh/basic-concepts/links)中了解更多关于连线的信息。
+在[连线](/docs/concepts/links)中了解更多关于连线的信息。
 
 ## 属性控制每个步骤
 
@@ -63,7 +63,7 @@ ComfyUI 会将这些步骤显示为画布上的方框。
 
 您通常可以直接在节点上设置属性。某些属性也可以从另一个节点获取值。
 
-在 [属性](https://docs.comfy.org/zh/basic-concepts/properties) 中了解更多关于属性的信息。
+在 [属性](/docs/concepts/properties) 中了解更多关于属性的信息。
 
 ## 运行工作流
 
@@ -77,7 +77,7 @@ ComfyUI 会将这些步骤显示为画布上的方框。
 
 模板使用 ComfyUI 自带的 Core 节点，还会提示你下载所需的模型。
 
-社区已创建了许多自定义节点，以增加更多功能。了解更多，请参阅[自定义节点](https://docs.comfy.org/zh/basic-concepts/custom-nodes)。
+社区已创建了许多自定义节点，以增加更多功能。了解更多，请参阅[自定义节点](/docs/concepts/custom-nodes)。
 
 ## 保存和共享工作流
 

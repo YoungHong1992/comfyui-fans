@@ -6,6 +6,7 @@
 import React from 'react';
 import MDXComponents from '@theme-original/MDXComponents';
 import Admonition from '@theme/Admonition';
+import Link from '@docusaurus/Link';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -39,12 +40,38 @@ function Card({title, href, children}) {
       {children ? <div className="mint-card-body">{children}</div> : null}
     </div>
   );
-  return href ? (
-    <a href={href} className="mint-card-link" target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
+  if (!href) {
+    return inner;
+  }
+
+  const isExternal = /^(https?:)?\/\//.test(href) || href.startsWith('mailto:');
+  // 站内静态资源（/img/xxx.png 等素材下载）带扩展名，不是 SPA 路由，
+  // 必须用原生 <a>：走 <Link> 会被当成路由处理并触发坏链报错。
+  const isAsset = !isExternal && /\.[a-z0-9]{2,5}(?:[?#].*)?$/i.test(href);
+
+  if (isExternal) {
+    return (
+      <a
+        href={href}
+        className="mint-card-link"
+        target="_blank"
+        rel="noopener noreferrer">
+        {inner}
+      </a>
+    );
+  }
+  if (isAsset) {
+    return (
+      <a href={href} className="mint-card-link">
+        {inner}
+      </a>
+    );
+  }
+  // 站内文档路由：走 <Link> 以获得 SPA 跳转，并纳入 onBrokenLinks 校验。
+  return (
+    <Link to={href} className="mint-card-link">
       {inner}
-    </a>
-  ) : (
-    inner
+    </Link>
   );
 }
 

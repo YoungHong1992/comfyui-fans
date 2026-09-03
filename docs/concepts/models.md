@@ -9,9 +9,9 @@
 
 ### ComfyUI 支持的模型
 
-* **官方直接覆盖的模型数量有限**，但随着 ComfyUI 与开源社区的发展，支持面会持续扩展。一旦某模型纳入支持，**通常会在 [工作流模板](https://docs.comfy.org/zh/interface/features/template) 中增加对应模板**，便于一键对照使用。
-* **并非所有模型都能开箱即用。** 若你使用的是 **ComfyUI 原生支持的模型及其常见衍生/配套权重**，请先 [将 ComfyUI 更新到较新版本](https://docs.comfy.org/zh/installation/update_comfyui)，并在 [模板库](https://docs.comfy.org/zh/interface/features/template) 中确认是否已有匹配的模板与模型提示。
-* **另一部分模型依赖社区提供的自定义节点** 才能使用；不同作者的 **模型路径、节点用法可能不一致**。请务必阅读各项目自带的 **README 或文档** 并按说明操作。ComfyUI 本身扩展方式较自由，因此实现细节会因作者而异；需要安装或排查自定义节点时，可参考 [如何安装自定义节点](https://docs.comfy.org/zh/installation/install_custom_node)。
+* **官方直接覆盖的模型数量有限**，但随着 ComfyUI 与开源社区的发展，支持面会持续扩展。一旦某模型纳入支持，**通常会在 [工作流模板](/docs/interface/template) 中增加对应模板**，便于一键对照使用。
+* **并非所有模型都能开箱即用。** 若你使用的是 **ComfyUI 原生支持的模型及其常见衍生/配套权重**，请先 [将 ComfyUI 更新到较新版本](/docs/get-started/update)，并在 [模板库](/docs/interface/template) 中确认是否已有匹配的模板与模型提示。
+* **另一部分模型依赖社区提供的自定义节点** 才能使用；不同作者的 **模型路径、节点用法可能不一致**。请务必阅读各项目自带的 **README 或文档** 并按说明操作。ComfyUI 本身扩展方式较自由，因此实现细节会因作者而异；需要安装或排查自定义节点时，可参考 [如何安装自定义节点](/docs/get-started/custom-nodes/install)。
 
 ## 在 ComfyUI 里使用模型
 
@@ -52,7 +52,7 @@
 
 <Tabs>
   <TabItem value="Portable 及自部署">
-    对于[便携版](https://docs.comfy.org/zh/installation/comfyui_portable_windows)和[手动安装](https://docs.comfy.org/zh/installation/manual_install)的 ComfyUI版本，你可以在 ComfyUI 的根目录下找到 `extra_model_paths.yaml.example` 的示例文件
+    对于[便携版](/docs/get-started/install/portable)和[手动安装](/docs/get-started/install/manual)的 ComfyUI版本，你可以在 ComfyUI 的根目录下找到 `extra_model_paths.yaml.example` 的示例文件
 
     ```
     ComfyUI/extra_model_paths.yaml.example

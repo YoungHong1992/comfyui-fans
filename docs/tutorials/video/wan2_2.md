@@ -3,7 +3,7 @@
 
 > 在 ComfyUI 中运行 Wan2.2 视频工作流：5B 混合 TI2V 模型，以及 14B 文生视频、图生视频和首尾帧示例，附下载链接。
 
-<iframe className="w-full aspect-video rounded-xl" src="https://docs.comfy.org//player.bilibili.com/player.html?isOutside=true&aid=114930791549176&bvid=BV1gk8EzaEGt&cid=31337744098&p=1" title="ComfyUI Selection Toolbox New Features" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+<iframe className="w-full aspect-video rounded-xl" src="https://player.bilibili.com/player.html?isOutside=true&aid=114930791549176&bvid=BV1gk8EzaEGt&cid=31337744098&p=1" title="ComfyUI Selection Toolbox New Features" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
 
 通义万相 2.2（Wan 2.2）是阿里云推出的新一代多模态生成模型。该模型采用创新的 MoE（Mixture of Experts）架构，由高噪专家模型和低噪专家模型组成，能够根据去噪时间步进行专家模型划分，从而生成更高质量的视频内容。
 
@@ -47,9 +47,9 @@ Wan2.2 系列模型基于 Apache2.0 开源协议，支持商业使用。Apache2.
       请确保你的 ComfyUI 已经更新。
 
       * [ComfyUI 下载](https://www.comfy.org/download)
-      * [ComfyUI 更新教程](https://docs.comfy.org/zh/installation/update_comfyui)
+      * [ComfyUI 更新教程](/docs/get-started/update)
 
-      本指南里的工作流可以在[工作流模板](https://docs.comfy.org/zh/interface/features/template)中找到。如果找不到，可能是 ComfyUI 没有更新。
+      本指南里的工作流可以在[工作流模板](/docs/interface/template)中找到。如果找不到，可能是 ComfyUI 没有更新。
 
       如果加载工作流时有节点缺失，可能原因有：
 

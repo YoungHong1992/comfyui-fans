@@ -108,5 +108,5 @@ ComfyUI/
 5. **降低GPU负担**：分两次生成可以在有限的GPU资源下生成高质量大图
 
 <Tip>
-  如需了解更多关于混合多个ControlNet的技巧，请参考[混合ControlNet模型](https://docs.comfy.org/zh/tutorials/controlnet/mixing-controlnets)教程。
+  如需了解更多关于混合多个ControlNet的技巧，请参考[混合ControlNet模型](/docs/tutorials/controlnet/mixing-controlnets)教程。
 </Tip>

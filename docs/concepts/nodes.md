@@ -31,11 +31,11 @@ ComfyUI 中的节点通常是**函数算子**：它们对数据进行处理以�
 3. **错误(Error)状态**： 节点错误，通常在运行工作流后，如果对应的节点输入存在问题，导致了错误会显示这个状态，并用红色标识对应出错的输入节点，你需要解决对应出错的输入来保证工作流正常运行
 4. **丢失(Missing)状态**： 这个状态通常在你导入了一些工作流后会出现，存在两种可能
    * ComfyCore 原生节点丢失： 这通常是因为 ComfyUI 的版本更新了，而你当前使用的 ComfyUI 版本较旧，你需要更新 ComfyUI 来解决这个问题
-   * 自定义节点丢失： 工作流使用了第三方作者开发的自定义节点，而本地尚未安装对应扩展。可使用 [ComfyUI Manager](https://docs.comfy.org/zh/manager/overview) 查找并安装，或参阅 [如何安装自定义节点](https://docs.comfy.org/zh/installation/install_custom_node) 了解其它方式
+   * 自定义节点丢失： 工作流使用了第三方作者开发的自定义节点，而本地尚未安装对应扩展。可使用 [ComfyUI Manager](/docs/get-started/custom-nodes/manager) 查找并安装，或参阅 [如何安装自定义节点](/docs/get-started/custom-nodes/install) 了解其它方式
 
 ## 节点之间的连接
 
-在 ComfyUI 中，节点通过[连线](https://docs.comfy.org/zh/basic-concepts/links)连接，从而让相同的数据类型在不同的处理单元之间进行流转处理,从而获得最终的结果。
+在 ComfyUI 中，节点通过[连线](/docs/concepts/links)连接，从而让相同的数据类型在不同的处理单元之间进行流转处理,从而获得最终的结果。
 
 <img src="/img/concepts/node/inpaint.jpg" alt="ComfyUI 节点连线" width="2000" height="1108" data-path="images/concepts/node/inpaint.jpg" />
 
@@ -170,12 +170,12 @@ ComfyUI 中的节点通常是**函数算子**：它们对数据进行处理以�
 
 ComfyUI 默认安装中包含大量 **Comfy Core** 节点。社区还在 [自定义节点注册站](https://registry.comfy.org) 上提供了丰富的扩展。
 
-关于自定义节点的完整安装方式汇总——**ComfyUI Manager**、Git 克隆、ZIP 下载、依赖处理与安全提示——请参阅 [如何安装自定义节点](https://docs.comfy.org/zh/installation/install_custom_node)。
+关于自定义节点的完整安装方式汇总——**ComfyUI Manager**、Git 克隆、ZIP 下载、依赖处理与安全提示——请参阅 [如何安装自定义节点](/docs/get-started/custom-nodes/install)。
 
 ### ComfyUI Manager
 
 日常使用自定义节点时，推荐通过 **ComfyUI Manager** 完成：从注册表搜索并安装、更新或禁用扩展包、根据导入的工作流检测缺失节点，以及配合管理模型与快照等。桌面版通常已默认启用；便携版与手动安装环境可能需要先在文档中按步骤开启 Manager。
 
-<Card title="ComfyUI Manager" icon="puzzle-piece" href="https://docs.comfy.org/zh/manager/overview">
+<Card title="ComfyUI Manager" icon="puzzle-piece" href="/docs/get-started/custom-nodes/manager">
   功能概述、启用方式与节点安装相关流程
 </Card>

@@ -57,7 +57,7 @@
 
 ## 文生图组合工作流
 
-在掌握基础的图像放大之后，我们可以将其与[文生图](https://docs.comfy.org/zh/tutorials/basic/text-to-image)工作流进行组合。关于文生图的基础知识，请参阅[文生图教程](https://docs.comfy.org/zh/tutorials/basic/text-to-image)。
+在掌握基础的图像放大之后，我们可以将其与[文生图](/docs/tutorials/basic/text-to-image)工作流进行组合。关于文生图的基础知识，请参阅[文生图教程](/docs/tutorials/basic/text-to-image)。
 
 下载并将此图像拖入 ComfyUI，即可加载组合工作流：
 
