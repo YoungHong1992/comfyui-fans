@@ -65,7 +65,7 @@ export default function Home() {
       <main className="container">
         {/* ===== Hero ===== */}
         <div className="hero-banner">
-          <span className="hero-badge">官方中文文档 · 原样搬运</span>
+          <span className="hero-badge">基于官方中文文档 · 整理调整</span>
           <h1 className="hero-title">
             ComfyUI Fans
             <br />
@@ -75,7 +75,7 @@ export default function Home() {
           </h1>
           <p className="hero-sub">
             ComfyUI 是最流行的开源节点式生成式 AI 应用，可用于搭建图像、视频与音频生成工作流。
-            本站对齐官方文档的信息架构，原样搬运官方中文教程内容；后续将推出逐节点的原创拆解文章。
+            本站对齐官方文档的信息架构，在官方中文教程的基础上做了适合初学者的整理与调整；后续将推出逐节点的原创拆解文章。
           </p>
           <div className="hero-actions">
             <Link className="button button--lg btn-primary-lg" to="/docs/get-started/intro">
@@ -123,7 +123,7 @@ export default function Home() {
           icon="book"
           color="#0f766e"
           title="官方资源"
-          desc="本站内容搬运自官方中文文档，遇到偏差时请以官方渠道为准。"
+          desc="本站内容基于官方中文文档整理与调整，遇到偏差时请以官方渠道为准。"
         >
           <Card icon="book" color="#0f766e" title="ComfyUI 官方文档" desc="docs.comfy.org —— 官方中文文档，安装、概念与最新教程的第一手来源。" to="https://docs.comfy.org/zh" />
           <Card icon="grid" color="#0f766e" title="官方示例工作流库" desc="comfyanonymous.github.io/ComfyUI_examples —— 官方维护的各类工作流 JSON 模板。" to="https://comfyanonymous.github.io/ComfyUI_examples/" />

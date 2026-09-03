@@ -135,7 +135,8 @@ const config = {
             ],
           },
         ],
-        copyright: `ComfyUI Fans（comfyui.fans）· 个人学习用途的独立爱好者教学站，与 Comfy Org 无从属关系。ComfyUI 采用 GPL-3.0 开源协议。`,
+        copyright: `© ${new Date().getFullYear()} ComfyUI Fans（comfyui.fans）· 个人学习用途的独立爱好者教学站，与 Comfy Org 无从属关系。<br/>
+ComfyUI 及其名称、标识的版权归 comfyanonymous 与 Comfy Org 所有，软件以 <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank" rel="noopener noreferrer">GPL-3.0</a> 协议开源；本站内容基于 <a href="https://docs.comfy.org/zh" target="_blank" rel="noopener noreferrer">ComfyUI 官方中文文档</a> 整理与调整，版权归原作者所有，仅供学习交流、非商业用途，如有侵权请联系删除。`,
       },
       prism: {
         theme: lightCodeTheme,

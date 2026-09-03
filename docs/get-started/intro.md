@@ -1,62 +1,41 @@
+---
+title: 介绍
+---
 
-# ComfyUI 官方文档
+<div className="intro-hero">
+  <img src="/img/logo/light.svg" className="logo-theme-light" width="204" height="57" />
 
-> ComfyUI 官方文档。开源、基于节点的生成式 AI 应用，支持构建图像、视频、音频和 3D 生成工作流。
+  <img src="/img/logo/dark.svg" className="logo-theme-dark" width="204" height="57" />
 
-<div className="relative">
-  <div className="w-full text-center mt-16 pb-8">
-    <div className="mt-24 text-center">
-      <img src="/img/logo/light.svg" className="block dark:hidden pointer-events-none mx-auto" width="204" height="57" data-path="logo/light.svg" />
+  <div className="intro-social">
+    <a href="https://github.com/Comfy-Org/ComfyUI/" target="_blank">
+      <Icon icon="github" iconType="solid" size={32} />
+    </a>
 
-      <img src="/img/logo/dark.svg" className="hidden dark:block pointer-events-none mx-auto" width="204" height="57" data-path="logo/dark.svg" />
-    </div>
+    <a href="https://x.com/ComfyUI" target="_blank">
+      <Icon icon="x-twitter" iconType="solid" size={32} />
+    </a>
 
-    <div className="flex justify-center w-full">
-      <h1
-        style={{
-      fontSize: "18px",
-      fontWeight: "bold",
-      marginTop: "10px",
-      textAlign: "center"
-    }}
-        className="text-center"
-      >
-        ComfyUI 官方文档
-      </h1>
-    </div>
+    <a href="https://discord.com/invite/comfyorg" target="_blank">
+      <Icon icon="discord" iconType="solid" size={32} />
+    </a>
+
+    <a href="https://raw.githubusercontent.com/Comfy-Org/docs/refs/heads/main/images/index/qrcode.jpg" target="_blank">
+      <Icon icon="weixin" iconType="solid" size={32} />
+    </a>
+
+    <a href="https://www.youtube.com/@comfyorg" target="_blank">
+      <Icon icon="youtube" iconType="solid" size={32} />
+    </a>
   </div>
 
-  <div className="text-center pb-8">
-    <div className="flex gap-4 justify-center items-center">
-      <a href="https://github.com/Comfy-Org/ComfyUI/" target="_blank" className="hover:opacity-80">
-        <Icon icon="github" iconType="solid" size={32} />
-      </a>
+  <p className="intro-tagline">
+    最强大的开源节点式生成式 AI 应用，支持构建图像、视频、音频和 3D 生成工作流。
+  </p>
+</div>
 
-      <a href="https://x.com/ComfyUI" target="_blank" className="hover:opacity-80">
-        <Icon icon="x-twitter" iconType="solid" size={32} />
-      </a>
-
-      <a href="https://discord.com/invite/comfyorg" target="_blank" className="hover:opacity-80">
-        <Icon icon="discord" iconType="solid" size={32} />
-      </a>
-
-      <a href="https://raw.githubusercontent.com/Comfy-Org/docs/refs/heads/main/images/index/qrcode.jpg" target="_blank" className="hover:opacity-80">
-        <Icon icon="weixin" iconType="solid" size={32} />
-      </a>
-
-      <a href="https://www.youtube.com/@comfyorg" target="_blank" className="hover:opacity-80">
-        <Icon icon="youtube" iconType="solid" size={32} />
-      </a>
-    </div>
-  </div>
-
-  <div className="px-4 max-w-5xl mx-auto">
-    <p className="max-w-xl mx-auto px-4 mb-12 text-lg text-center text-gray-500 dark:text-zinc-500">
-      最强大的开源节点式生成式 AI 应用程序
-    </p>
-
-    <div className="mb-12">
-      <h2 className="text-2xl font-bold mb-6 text-center">开始使用</h2>
+    <div className="intro-section">
+      <h2>开始使用</h2>
 
       <CardGroup cols={3}>
         <Card title="下载安装" icon="download" href="https://docs.comfy.org/zh/installation/system_requirements">
@@ -77,8 +56,8 @@
       </CardGroup>
     </div>
 
-    <div className="mb-12">
-      <h2 className="text-2xl font-bold mb-6 text-center">AI 智能体与 MCP</h2>
+    <div className="intro-section">
+      <h2>AI 智能体与 MCP</h2>
 
       <CardGroup cols={3}>
         <Card title="智能体工具概览" icon="robot" href="https://docs.comfy.org/zh/agent-tools">
@@ -95,8 +74,8 @@
       </CardGroup>
     </div>
 
-    <div className="mb-12">
-      <h2 className="text-2xl font-bold mb-6 text-center">学习与教程</h2>
+    <div className="intro-section">
+      <h2>学习与教程</h2>
 
       <CardGroup cols={3}>
         <Card title="界面指南" icon="window-maximize" href="https://docs.comfy.org/zh/interface/overview">
@@ -113,8 +92,8 @@
       </CardGroup>
     </div>
 
-    <div className="mb-12">
-      <h2 className="text-2xl font-bold mb-6 text-center">开发与扩展</h2>
+    <div className="intro-section">
+      <h2>开发与扩展</h2>
 
       <CardGroup cols={3}>
         <Card title="开发指南" icon="code" href="https://docs.comfy.org/zh/development/overview">
@@ -139,8 +118,8 @@
       </CardGroup>
     </div>
 
-    <div className="mb-12">
-      <h2 className="text-2xl font-bold mb-6 text-center">获取帮助</h2>
+    <div className="intro-section">
+      <h2>获取帮助</h2>
 
       <CardGroup cols={3}>
         <Card title="联系支持" icon="headset" href="https://docs.comfy.org/zh/support/contact-support">
@@ -165,18 +144,17 @@
       </CardGroup>
     </div>
 
-    <div className="text-center mt-16 mb-8">
-      <h2 className="text-2xl font-bold mb-4">关于 ComfyUI</h2>
+    <div className="intro-about">
+      <h2>关于 ComfyUI</h2>
 
-      <p className="mb-4">
-        由 <a href="https://github.com/comfyanonymous" className="text-blue-500 dark:text-blue-400 underline hover:text-blue-600 dark:hover:text-blue-500">comfyanonymous</a> 和其他<a href="https://github.com/Comfy-Org/ComfyUI/graphs/contributors" className="text-blue-500 dark:text-blue-400 underline hover:text-blue-600 dark:hover:text-blue-500">贡献者</a>开发。
+      <p>
+        由 <a href="https://github.com/comfyanonymous">comfyanonymous</a> 和其他<a href="https://github.com/Comfy-Org/ComfyUI/graphs/contributors">贡献者</a>开发。
       </p>
 
-      <ul className="list-none space-y-2 max-w-2xl mx-auto">
+      <ul>
         <li><strong>ComfyUI</strong> 是一个基于节点的生成式 AI 界面和推理引擎</li>
         <li>用户可以通过节点组合各种 AI 模型和操作，实现高度可定制和可控的内容生成</li>
         <li>ComfyUI 完全开源，可以在本地设备上运行</li>
       </ul>
     </div>
-  </div>
-</div>
+

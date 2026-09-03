@@ -416,6 +416,80 @@ div[class^='codeBlockContainer'],
   max-width: 100%;
 }
 
+/* ============ 主题自适应 Logo（浅/深色二选一显示，替代官方文档的 Tailwind 类） ============ */
+.logo-theme-light,
+.logo-theme-dark {
+  display: block;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+}
+
+.logo-theme-dark {
+  display: none;
+}
+
+[data-theme='dark'] .logo-theme-light {
+  display: none;
+}
+
+[data-theme='dark'] .logo-theme-dark {
+  display: block;
+}
+
+/* ============ intro 页顶部：logo + 社交图标 + 标语 ============ */
+.intro-hero {
+  margin: 2.2rem auto 0.8rem;
+  text-align: center;
+}
+
+.intro-social {
+  align-items: center;
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  margin-top: 1.4rem;
+}
+
+.intro-social a {
+  color: var(--ifm-color-emphasis-800);
+  transition: color 0.15s ease;
+}
+
+.intro-social a:hover {
+  color: var(--ifm-color-primary);
+}
+
+.intro-tagline {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 1.05rem;
+  margin: 1.3rem auto 2.4rem;
+  max-width: 36rem;
+}
+
+/* intro 页卡片分区标题 */
+.intro-section h2 {
+  text-align: center;
+}
+
+/* intro 页「关于 ComfyUI」区块 */
+.intro-about {
+  margin: 3rem auto 1rem;
+  text-align: center;
+}
+
+.intro-about ul {
+  list-style: none;
+  margin: 0 auto;
+  max-width: 42rem;
+  padding: 0;
+}
+
+.intro-about li {
+  margin: 0.55rem 0;
+}
+
 /* ============ 提示框 ============ */
 .admonition {
   border-radius: 12px;

@@ -1,7 +1,7 @@
 /**
  * Mintlify → Docusaurus 组件映射层。
- * 本站搬运的官方文档使用 Mintlify 专属组件（<Tip> <Card> <Steps> 等），
- * 在这里统一映射为 Docusaurus 等价物，正文保持原样不改动。
+ * 本站文档源自官方文档，使用 Mintlify 专属组件（<Tip> <Card> <Steps> 等），
+ * 在这里统一映射为 Docusaurus 等价物。
  */
 import React from 'react';
 import MDXComponents from '@theme-original/MDXComponents';
